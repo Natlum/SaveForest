@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.MainActivity">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,12 +21,14 @@
         <activity
             android:name=".StartActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FormStepBAvtivity"
             android:label="@string/title_activity_form_step_bavtivity"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.StartActivity" />
@@ -33,7 +37,8 @@
             android:name=".FormStepAActivity_old"
             android:label="@string/title_activity_form_step_a"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.StartActivity" />
@@ -42,7 +47,8 @@
             android:name=".FormStepAActivity"
             android:label="@string/title_activity_form_step_a"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.StartActivity" />
@@ -50,7 +56,8 @@
         <activity
             android:name=".AboutUsActivity"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/Theme.AppCompat.Dialog">
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.StartActivity" />
@@ -59,7 +66,8 @@
             android:name=".HistoryAdviceActivity"
             android:label="@string/title_activity_history_advice"
             android:parentActivityName=".StartActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.StartActivity" />
@@ -67,7 +75,8 @@
         <activity
             android:name=".HelpActivity"
             android:theme="@style/Theme.AppCompat.Dialog"
-            android:label="@string/title_activity_help">
+            android:label="@string/title_activity_help"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>
