@@ -1,0 +1,82 @@
+<resources>
+    <!-- Activity Main -->
+    <string name="app_name">Save Forest</string>
+    <string name="fail_message">Se ha producido un erro al cargar la aplicación</string>
+
+    <!-- Navigation View -->
+    <string name="nav_header_title">Save the Forest</string>
+    <string name="nav_header_subtitle">Protege lo que más importa</string>
+    <string name="new_advice">Nuevo aviso</string>
+    <string name="history_advice">Historial de avisos</string>
+    <string name="aboutUs">Acerca de &#8230;</string>
+    <string name="navigation_drawer_open">Abrir menú lateral</string>
+    <string name="navigation_drawer_close">Cerrar menú lateral</string>
+
+    <!-- AppBar Menu -->
+    <string name="help_button">Ayuda</string>
+    <string name="action_settings">Ajustes</string>
+
+    <!-- Activity Start -->
+    <string name="title">Formulario de nuevo aviso</string>
+    <string name="write_name">Su nombre completo aquí</string>
+    <string name="call_me">¿Quieres que te llamemos?</string>
+    <string name="next_activity">Continuar</string>
+    <string name="message_form">Debe introducir un nombre</string><!-- Este ya no se usa aquí-->
+    <string name="error_required_field">Campo obligatorio</string>
+
+    <!-- Activity FormStepB -->
+    <string name="title_activity_form_step_bavtivity">Formulario de llamada</string>
+    <string name="thanks">Muchas gracias</string>
+    <string name="message">En breve recibirá una llamada.</string>
+
+    <!-- Activity FormStepA Old -->
+    <string name="radio_button_man">Hombre</string>
+    <string name="radio_button_woman">Mujer</string>
+    <string name="message_form_man">Usted es un hombre</string>
+    <string name="message_form_woman">Usted es una mujer</string>
+
+    <!-- Activity FormStepA -->
+    <string name="title_activity_form_step_a">Formulario de aviso</string>
+    <string-array name="tabs_name">
+        <item>Paso 1</item>
+        <item>Paso 2</item>
+    </string-array>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Activity About Us -->
+    <string name="author">José Juan Sosa Rodríguez</string>
+    <string name="about_us_text">\t Este es el proyecto, creado para 3º de DAM del instituto IES El Rincón.
+                                \n\n \t Esta aplicación está diseñada para que cualquier usuario pueda enviar una
+                                notificación a servicios de emergencias y así evitar posibles catástrofes:
+                                (Incendios, Desprendimientos, Accidentes &#8230;)</string>
+
+    <!-- Activity History Advice -->
+    <string name="title_activity_history_advice">Historial de avisos</string>
+
+    <!-- Activity Help -->
+    <string name="title_activity_help">Ayuda</string>
+    <string-array name="help">
+        <item>\t Introduzca su nombre y pulse continuar.\n\n\t Si marca la casilla de recibir una llamada,
+            se le pedirá el número de teléfono y recibirá una llamada del servicio de emergencia lo antes posible.</item>
+        <item>\t Seleccione o haga una fotografía con la cámara, estriba una breve descripción de la incidencia, marque
+            la ubicación para hacer el aviso más exácto posible y por último rellene los datos requeridos.
+            \n\n\t Al pulsar en enviar, los servicios de emergencia recibirán su aviso, puede que
+            intenten ponerse en contacto con usted.</item>
+        <item>\t Seleccione el país, introduzca su número de teléfono sin la extención de su país. \n\n \t
+            Inserte una breve descripción de la incidencia. \n\t Recibirá una llamada del servicio de emergencia lo
+            antes posible.</item>
+        <item>\t Se muestra un listado de cada uno de los avisos realizados por este teléfono móvil.
+            \n\n\t Al hacer clic sobre cualquiera de los avisos, se motrará toda la información de ese aviso.</item>
+    </string-array>
+
+    <!-- Fragment StepA Step1 -->
+    <string name="button_photo">Añadir Foto</string>
+    <string name="text_description">Intodruce una breve descripción</string>
+    <string name="button_next">Siguiente</string>
+
+    <!-- Fragment StepB Step2 -->
+    <string name="title_countries">Seleccione el país</string>
+    <string name="gps">Añadir la ubicación GPS</string>
+    <string name="send_step_a">Enviar</string>
+
+</resources>
