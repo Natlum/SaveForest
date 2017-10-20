@@ -71,7 +71,7 @@
 
     <!-- Fragment StepA Step1 -->
     <string name="button_photo">Añadir Foto</string>
-    <string name="text_description">Intodruce una breve descripción</string>
+    <string name="text_description">Introduce una breve descripción</string>
     <string name="button_next">Siguiente</string>
 
     <!-- Fragment StepB Step2 -->

@@ -1,9 +1,56 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="es.jjsr.saveforest.fragments.StepA.Step2Fragment">
 
 
+    <LinearLayout
+        android:id="@+id/firstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_countries"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"/>
+
+        <Spinner
+            android:id="@+id/SpinerCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:paddingEnd="25dp"
+            android:paddingStart="25dp"></Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/firstLayout"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        android:elevation="5dp">
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gps" />
+
+        <include layout="@layout/fragment_google_maps" />
+
+    </LinearLayout>
+
+</LinearLayout>
