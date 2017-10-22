@@ -78,5 +78,8 @@
     <string name="title_countries">Seleccione el país</string>
     <string name="gps">Añadir la ubicación GPS</string>
     <string name="send_step_a">Enviar</string>
+    <string name="mark">Su posición es: (</string>
+    <string name="permission_denied">Debe dar permisos a la aplicación para añadir la ubicación GPS.</string>
+    <string name="validate_location">Debe añadir la ubicación</string>
 
 </resources>

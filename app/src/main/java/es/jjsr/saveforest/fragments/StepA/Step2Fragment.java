@@ -8,26 +8,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import es.jjsr.saveforest.R;
+import es.jjsr.saveforest.resource.GPSPosition;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Step2Fragment extends Fragment implements OnMapReadyCallback{
+public class Step2Fragment extends Fragment implements OnMapReadyCallback {
 
 
     private Spinner spinner;
     private final int ESPANA = 2;
     private GoogleMap map;
+    private SupportMapFragment mapFragment;
+    private double latitude = 0;
+    private double longitude = 0;
+    private String country = "";
 
     public Step2Fragment() {
         // Required empty public constructor
@@ -47,14 +57,17 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_step2, container, false);
+
         spinnerStart(v);
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if(mapFragment != null){
-            mapFragment.getMapAsync(this);
-        }
+        mapStart();
+        gpsStart(v);
 
         return v;
+    }
 
+    private void mapStart(){
+        mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void spinnerStart(View v){
@@ -64,10 +77,12 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(ESPANA);
+        country = spinner.getSelectedItem().toString();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
+                country = spinner.getSelectedItem().toString();
             }
 
             @Override
@@ -77,8 +92,68 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback{
         });
     }
 
+    private void gpsStart(View v){
+        final CheckBox checkBoxGPS = v.findViewById(R.id.checkBoxGPS);
+        checkBoxGPS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(checkBoxGPS.isChecked()){
+                    /*GPSPosition gpsPosition = new GPSPosition(getContext());
+                    if (gpsPosition.getPermissions()){
+                        Toast.makeText(getContext(), "Las coordenadas son: " + gpsPosition.getLatitude()
+                                 + ", " + gpsPosition.getLongitude(), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
+                        checkBoxGPS.setChecked(false);
+                    }*/
+                    latitude = 40.417325;
+                    longitude = -3.683081;
+                    gpsPositionMaps(latitude, longitude);
+                }
+            }
+        });
+    }
+
+    private void gpsPositionMaps(double latitude, double longitude){
+        LatLng gpsPosition = new LatLng(latitude,longitude);
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(gpsPosition)  //Centramos el mapa en la posición gps
+                .zoom(19)            //Establecemos el zoom
+                .bearing(45)        //Establecemos la orientación con el noreste arriba
+                .tilt(70)           //Bajamos el punto de vista de la cámara en grados
+                .build();
+
+        //CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(40.41, -3.69), 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        map.moveCamera(cameraUpdate);
+        insertMark(latitude, longitude);
+    }
+
+    private void insertMark(double latitude, double longitude){
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .title(getString(R.string.mark)+ latitude + ", " + longitude +")"));
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+
+        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setMapToolbarEnabled(false);
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public String getCountry() {
+        return country;
     }
 }

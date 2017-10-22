@@ -16,6 +16,8 @@ import es.jjsr.saveforest.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
+    private Step1Fragment step1;
+    private Step2Fragment step2;
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -25,9 +27,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         if(position == 0){
-            return Step1Fragment.newInstance();
+            step1 = Step1Fragment.newInstance();
+            return step1;
         }else {
-            return Step2Fragment.newInstance();
+            step2 = Step2Fragment.newInstance();
+            return step2;
         }
     }
 
@@ -46,5 +50,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Resources res = context.getResources();
         String [] tabs = res.getStringArray(R.array.tabs_name);
         return tabs[position];
+    }
+
+    public Step1Fragment getStep1() {
+        return step1;
+    }
+
+    public Step2Fragment getStep2() {
+        return step2;
     }
 }

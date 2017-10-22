@@ -44,7 +44,7 @@
         android:elevation="5dp">
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBoxGPS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gps" />

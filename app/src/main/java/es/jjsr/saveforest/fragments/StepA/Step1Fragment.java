@@ -6,14 +6,37 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import es.jjsr.saveforest.R;
+import es.jjsr.saveforest.dto.AdviceGlobal;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Step1Fragment extends Fragment {
 
+
+    private EditText description;
+    private ImageView photo;
+
+    public EditText getDescription() {
+        return description;
+    }
+
+    public void setDescription(EditText description) {
+        this.description = description;
+    }
+
+    public ImageView getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(ImageView photo) {
+        this.photo = photo;
+    }
 
     public Step1Fragment() {
         // Required empty public constructor
@@ -32,7 +55,14 @@ public class Step1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_step1, container, false);
+        View v = inflater.inflate(R.layout.fragment_step1, container, false);
+
+        initElements(v);
+
+        return v;
     }
 
+    private void initElements(View v){
+        description = (EditText) v.findViewById(R.id.editTextDescription);
+    }
 }

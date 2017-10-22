@@ -1,14 +1,14 @@
 package es.jjsr.saveforest.dto;
 
-import java.util.Date;
+
 
 /**
+ * Esta clase es para usarla en un listado de objetos con valores obtenidos de la base de datos
  * Created by José Juan Sosa Rodríguez on 12/10/2017.
  */
 
 public class Advice {
 
-    //private Date dateAdvice;
     private String text;
 
     public Advice(String text) {

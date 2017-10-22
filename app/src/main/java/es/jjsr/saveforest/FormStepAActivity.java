@@ -1,17 +1,25 @@
 package es.jjsr.saveforest;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
+import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
+import es.jjsr.saveforest.fragments.StepA.ValidateContent;
 
 public class FormStepAActivity extends AppCompatActivity {
 
@@ -50,8 +58,42 @@ public class FormStepAActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        initAdvice(getIntentReceived());
+        initElements();
     }
 
+    private String getIntentReceived(){
+        Intent intent = this.getIntent();
+        final String name = intent.getExtras().getString("name");
+        return name;
+    }
+
+    private void initAdvice(String name){
+        AdviceGlobal adviceGlobal = (AdviceGlobal) getApplication();
+        adviceGlobal.setName(name);
+    }
+
+    private void initElements(){
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingButtonSendStepA);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ValidateContent validateContent = new ValidateContent(mSectionsPagerAdapter, getApplicationContext());
+                if (validateContent.getEndValue()){
+                    saveContents();
+                }
+            }
+        });
+    }
+
+    private void saveContents(){
+        ((AdviceGlobal) getApplication()).setDescription(String.valueOf(mSectionsPagerAdapter.getStep1()
+                .getDescription().getText()));
+        ((AdviceGlobal) getApplication()).setCountry(mSectionsPagerAdapter.getStep2().getCountry());
+        ((AdviceGlobal) getApplication()).setLatitude(mSectionsPagerAdapter.getStep2().getLatitude());
+        ((AdviceGlobal) getApplication()).setLongitude(mSectionsPagerAdapter.getStep2().getLongitude());
+        Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
