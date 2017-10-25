@@ -13,13 +13,13 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
+
 
 /**
  * Created by José Juan Sosa Rodríguez on 21/10/2017.
  */
 
-public class GPSPosition extends Activity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks{
+/*public class GPSPosition extends Activity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks{
 
     private static final int PETICION_PERMISO_LOCALIZACION = 1984;
     private double latitude;
@@ -113,4 +113,4 @@ public class GPSPosition extends Activity implements GoogleApiClient.OnConnectio
         super.onStop();
         apiClient.disconnect();
     }
-}
+}*/

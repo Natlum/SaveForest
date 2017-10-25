@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import es.jjsr.saveforest.R;
-import es.jjsr.saveforest.resource.GPSPosition;
+import es.jjsr.saveforest.resource.NewGPSPosition;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,16 +98,17 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(checkBoxGPS.isChecked()){
-                    /*GPSPosition gpsPosition = new GPSPosition(getContext());
+                    NewGPSPosition gpsPosition = new NewGPSPosition();
                     if (gpsPosition.getPermissions()){
-                        Toast.makeText(getContext(), "Las coordenadas son: " + gpsPosition.getLatitude()
-                                 + ", " + gpsPosition.getLongitude(), Toast.LENGTH_LONG).show();
+                        latitude = gpsPosition.getLatitude();
+                        longitude = gpsPosition.getLongitude();
+                        Toast.makeText(getContext(), "La ubicación es: " + longitude + " " + longitude, Toast.LENGTH_LONG).show();
                     }else {
                         Toast.makeText(getContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
                         checkBoxGPS.setChecked(false);
-                    }*/
-                    latitude = 40.417325;
-                    longitude = -3.683081;
+                    }
+                    //latitude = 40.417325;
+                    //longitude = -3.683081;
                     gpsPositionMaps(latitude, longitude);
                 }
             }
