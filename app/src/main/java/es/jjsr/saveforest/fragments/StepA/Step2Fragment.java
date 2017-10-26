@@ -1,6 +1,7 @@
 package es.jjsr.saveforest.fragments.StepA;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,7 +24,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import es.jjsr.saveforest.R;
-import es.jjsr.saveforest.resource.NewGPSPosition;
+import es.jjsr.saveforest.resource.GPSPositionActivity;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +41,8 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
     private double latitude = 0;
     private double longitude = 0;
     private String country = "";
+    int request_code = 1;
+    CheckBox checkBoxGPS;
 
     public Step2Fragment() {
         // Required empty public constructor
@@ -93,26 +98,31 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void gpsStart(View v){
-        final CheckBox checkBoxGPS = v.findViewById(R.id.checkBoxGPS);
+        checkBoxGPS = v.findViewById(R.id.checkBoxGPS);
         checkBoxGPS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(checkBoxGPS.isChecked()){
-                    NewGPSPosition gpsPosition = new NewGPSPosition();
-                    if (gpsPosition.getPermissions()){
-                        latitude = gpsPosition.getLatitude();
-                        longitude = gpsPosition.getLongitude();
-                        Toast.makeText(getContext(), "La ubicación es: " + longitude + " " + longitude, Toast.LENGTH_LONG).show();
-                    }else {
-                        Toast.makeText(getContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
-                        checkBoxGPS.setChecked(false);
-                    }
-                    //latitude = 40.417325;
-                    //longitude = -3.683081;
-                    gpsPositionMaps(latitude, longitude);
+                    Intent intent = new Intent(getContext(), GPSPositionActivity.class);
+                    startActivityForResult(intent, request_code);
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == requestCode && resultCode == RESULT_OK){
+            latitude = data.getExtras().getDouble("latitude");
+            longitude = data.getExtras().getDouble("longitude");
+        }
+        if (latitude != 0 || longitude != 0){
+            gpsPositionMaps(latitude, longitude);
+        }else {
+            gpsPositionMaps(28.128092, -15.446435);
+            Toast.makeText(getContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
+            checkBoxGPS.setChecked(false);
+        }
     }
 
     private void gpsPositionMaps(double latitude, double longitude){
@@ -122,7 +132,7 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
                 .target(gpsPosition)  //Centramos el mapa en la posición gps
                 .zoom(19)            //Establecemos el zoom
                 .bearing(45)        //Establecemos la orientación con el noreste arriba
-                .tilt(70)           //Bajamos el punto de vista de la cámara en grados
+                .tilt(0)           //Bajamos el punto de vista de la cámara en grados
                 .build();
 
         //CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(40.41, -3.69), 15);
