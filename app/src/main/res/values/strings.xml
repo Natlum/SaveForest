@@ -81,5 +81,6 @@
     <string name="mark">Su posición es: (</string>
     <string name="permission_denied">Debe dar permisos a la aplicación o habilitar el GPS, para añadir la ubicación GPS.</string>
     <string name="validate_location">Debe añadir la ubicación</string>
+    <string name="fail_load_countries">No se ha podido cargar el listado de paises.</string>
 
 </resources>

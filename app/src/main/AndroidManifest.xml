@@ -92,6 +92,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog"></activity>
         <activity android:name=".resource.GPSPositionActivity"></activity>
+
+        <provider
+            android:authorities="es.jjsr.saveforest.contentProviderPackage.MyContentProvider"
+            android:name=".contentProviderPackage.MyContentProvider"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

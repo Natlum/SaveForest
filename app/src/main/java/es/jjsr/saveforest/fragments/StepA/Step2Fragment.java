@@ -1,9 +1,16 @@
 package es.jjsr.saveforest.fragments.StepA;
 
 
+
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import es.jjsr.saveforest.R;
+import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.resource.GPSPositionActivity;
 
 import static android.app.Activity.RESULT_OK;
@@ -31,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Step2Fragment extends Fragment implements OnMapReadyCallback {
+public class Step2Fragment extends Fragment implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<Cursor>{
 
 
     private Spinner spinner;
@@ -43,6 +51,10 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
     private int idCountry = 2;
     int request_code = 1;
     CheckBox checkBoxGPS;
+
+    private String [] arrayNameCountries;
+    int [] arrayIdCountries;
+    private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
     public Step2Fragment() {
         // Required empty public constructor
@@ -68,6 +80,14 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
         gpsStart(v);
 
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mCallbacks = this;
+        getLoaderManager().initLoader(0, null, mCallbacks);
     }
 
     private void mapStart(){
@@ -166,5 +186,48 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
 
     public int getIdCountry() {
         return idCountry;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        String columns[] = new String[] {Contract.Country.ID_COUNTRY, Contract.Country.NAME_COUNTRY};
+        Uri baseUri = Contract.Country.CONTENT_URI_COUNTRY;
+
+        String selection = null;
+
+        return new CursorLoader(getActivity(), baseUri, columns, selection, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Uri laUriBase = Contract.Country.CONTENT_URI_COUNTRY;
+        data.setNotificationUri(getActivity().getContentResolver(), laUriBase);
+
+        if (data != null){
+            arrayNameCountries = new String[data.getCount()];
+            arrayIdCountries = new int[data.getCount()];
+
+            data.moveToFirst();
+
+            int nameColumnIndex = data.getColumnIndex(Contract.Country.ID_COUNTRY);
+            int nameColumnIndexName = data.getColumnIndex(Contract.Country.NAME_COUNTRY);
+            int i = 0;
+
+            do {
+                arrayNameCountries[i]=data.getString(nameColumnIndexName);
+                arrayIdCountries[i]=data.getInt(nameColumnIndex);
+                i++;
+            }while (data.moveToNext());
+            
+            Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getContext(), getString(R.string.fail_load_countries), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }
