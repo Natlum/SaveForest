@@ -22,9 +22,10 @@ public class ResetAdviceGlobal extends Activity {
         adviceGlobal.setDate(null);*/
         ((AdviceGlobal) this.getApplication()).setName("");
         ((AdviceGlobal) this.getApplication()).setDescription("");
-        ((AdviceGlobal) this.getApplication()).setCountry("");
+        ((AdviceGlobal) this.getApplication()).setIdCountry(0);
         ((AdviceGlobal) this.getApplication()).setLatitude(0);
         ((AdviceGlobal) this.getApplication()).setLongitude(0);
         ((AdviceGlobal) this.getApplication()).setDate(null);
+        ((AdviceGlobal) this.getApplication()).setNameImage("");
     }
 }

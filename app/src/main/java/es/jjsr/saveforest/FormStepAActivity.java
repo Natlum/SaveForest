@@ -8,12 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -89,7 +86,7 @@ public class FormStepAActivity extends AppCompatActivity {
     private void saveContents(){
         ((AdviceGlobal) getApplication()).setDescription(String.valueOf(mSectionsPagerAdapter.getStep1()
                 .getDescription().getText()));
-        ((AdviceGlobal) getApplication()).setCountry(mSectionsPagerAdapter.getStep2().getCountry());
+        ((AdviceGlobal) getApplication()).setIdCountry(mSectionsPagerAdapter.getStep2().getIdCountry());
         ((AdviceGlobal) getApplication()).setLatitude(mSectionsPagerAdapter.getStep2().getLatitude());
         ((AdviceGlobal) getApplication()).setLongitude(mSectionsPagerAdapter.getStep2().getLongitude());
         Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();

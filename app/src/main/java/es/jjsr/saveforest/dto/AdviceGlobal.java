@@ -14,10 +14,11 @@ public class AdviceGlobal extends Application{
 
     private String name;
     private String description;
-    private String country;
+    private int idCountry;
     private double latitude;
     private double longitude;
     private Date date;
+    private String nameImage;
 
     public String getName() {
         return name;
@@ -35,12 +36,12 @@ public class AdviceGlobal extends Application{
         this.description = description;
     }
 
-    public String getCountry() {
-        return country;
+    public int getIdCountry() {
+        return idCountry;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setIdCountry(int country) {
+        this.idCountry = country;
     }
 
     public double getLatitude() {
@@ -65,5 +66,13 @@ public class AdviceGlobal extends Application{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getNameImage() {
+        return nameImage;
+    }
+
+    public void setNameImage(String nameImage) {
+        this.nameImage = nameImage;
     }
 }

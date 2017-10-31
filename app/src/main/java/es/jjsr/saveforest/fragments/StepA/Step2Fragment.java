@@ -40,7 +40,7 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
     private SupportMapFragment mapFragment;
     private double latitude = 0;
     private double longitude = 0;
-    private String country = "";
+    private int idCountry = 2;
     int request_code = 1;
     CheckBox checkBoxGPS;
 
@@ -82,12 +82,12 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(ESPANA);
-        country = spinner.getSelectedItem().toString();
+        idCountry = spinner.getSelectedItemPosition();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
-                country = spinner.getSelectedItem().toString();
+                idCountry = spinner.getSelectedItemPosition();
             }
 
             @Override
@@ -164,7 +164,7 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback {
         return longitude;
     }
 
-    public String getCountry() {
-        return country;
+    public int getIdCountry() {
+        return idCountry;
     }
 }
