@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import es.jjsr.saveforest.resource.ResetAdviceGlobal;
+
 /**
  * Aplicación creada por José Juan Sosa Rodríguez
  * Esta es la actividad que muestra la pantalla de inicio y luego carga la actividad principal.
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new ResetAdviceGlobal(this);
 
         mHandler = new Handler();
         try {

@@ -19,6 +19,7 @@ import java.util.Date;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
 import es.jjsr.saveforest.fragments.StepA.ValidateContent;
+import es.jjsr.saveforest.resource.InsertAdvice;
 
 public class FormStepAActivity extends AppCompatActivity {
 
@@ -93,7 +94,9 @@ public class FormStepAActivity extends AppCompatActivity {
         ((AdviceGlobal) getApplication()).setLongitude(mSectionsPagerAdapter.getStep2().getLongitude());
         ((AdviceGlobal) getApplication()).setNameImage(null);
         ((AdviceGlobal) getApplication()).setDate(new Date());
-        Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
+        new InsertAdvice(this, getContentResolver());
+        finish();
+        //Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
     }
 
     @Override

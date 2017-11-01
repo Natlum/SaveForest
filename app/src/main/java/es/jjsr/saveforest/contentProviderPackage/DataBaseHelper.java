@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Date;
+
 /**
  * Created by José Juan Sosa Rodríguez on 29/10/2017.
  */
@@ -51,6 +53,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private void initializerData(SQLiteDatabase db){
+        int now = (int) (new Date().getTime()/1000);
         db.execSQL("INSERT INTO " + COUNTRY_TABLE_NAME + "( " + Contract.Country.NAME_COUNTRY + ", " +
                 Contract.Country.CODE_COUNTRY + ") " +
                 "VALUES ('España', '+34'), "

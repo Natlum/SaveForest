@@ -75,7 +75,7 @@ public class AdapterForRecyclerView
         public ViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView)itemView.findViewById(R.id.item_card_view);
-            textView = (TextView)itemView.findViewById(R.id.textPrueba);
+            textView = (TextView)itemView.findViewById(R.id.textTitleCardView);
         }
     }
 

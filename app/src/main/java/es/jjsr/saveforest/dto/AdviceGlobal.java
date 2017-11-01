@@ -19,6 +19,7 @@ public class AdviceGlobal extends Application{
     private double longitude;
     private Date date;
     private String nameImage;
+    private int phoneNumber;
 
     public String getName() {
         return name;
@@ -74,5 +75,13 @@ public class AdviceGlobal extends Application{
 
     public void setNameImage(String nameImage) {
         this.nameImage = nameImage;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
