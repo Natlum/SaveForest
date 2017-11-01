@@ -37,7 +37,7 @@ public class AdapterForRecyclerView
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(advices.get(position).getText());
+        holder.textView.setText(advices.get(position).getDate().toString());
     }
 
     @Override

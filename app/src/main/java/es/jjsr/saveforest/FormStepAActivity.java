@@ -89,6 +89,7 @@ public class FormStepAActivity extends AppCompatActivity {
         ((AdviceGlobal) getApplication()).setIdCountry(mSectionsPagerAdapter.getStep2().getIdCountry());
         ((AdviceGlobal) getApplication()).setLatitude(mSectionsPagerAdapter.getStep2().getLatitude());
         ((AdviceGlobal) getApplication()).setLongitude(mSectionsPagerAdapter.getStep2().getLongitude());
+        ((AdviceGlobal) getApplication()).setNameImage(null);
         Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
     }
 
