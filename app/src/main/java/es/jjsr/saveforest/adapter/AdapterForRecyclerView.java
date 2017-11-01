@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import es.jjsr.saveforest.R;
@@ -37,7 +38,10 @@ public class AdapterForRecyclerView
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(advices.get(position).getDate().toString());
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formatedDate = newFormat.format(advices.get(position).getDate());
+        String tag = advices.get(position).getId() + " " + formatedDate;
+        holder.textView.setText(tag);
     }
 
     @Override

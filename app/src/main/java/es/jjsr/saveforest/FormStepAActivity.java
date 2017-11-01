@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import java.util.Date;
+
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
 import es.jjsr.saveforest.fragments.StepA.ValidateContent;
@@ -90,6 +92,7 @@ public class FormStepAActivity extends AppCompatActivity {
         ((AdviceGlobal) getApplication()).setLatitude(mSectionsPagerAdapter.getStep2().getLatitude());
         ((AdviceGlobal) getApplication()).setLongitude(mSectionsPagerAdapter.getStep2().getLongitude());
         ((AdviceGlobal) getApplication()).setNameImage(null);
+        ((AdviceGlobal) getApplication()).setDate(new Date());
         Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
     }
 

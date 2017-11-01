@@ -83,4 +83,8 @@
     <string name="validate_location">Debe añadir la ubicación</string>
     <string name="fail_load_countries">No se ha podido cargar el listado de paises.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tag">Aviso</string>
+
 </resources>
