@@ -43,18 +43,20 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
 
 
     private Spinner spinner;
-    private final int ESPANA = 2;
+    private int espanaPosition = 0;
     private GoogleMap map;
     private SupportMapFragment mapFragment;
     private double latitude = 0;
     private double longitude = 0;
-    private int idCountry = 2;
+    private int idCountry = 0;
     int request_code = 1;
     CheckBox checkBoxGPS;
 
     private String [] arrayNameCountries;
     int [] arrayIdCountries;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
+
+    private View v;
 
     public Step2Fragment() {
         // Required empty public constructor
@@ -73,9 +75,9 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_step2, container, false);
+        v = inflater.inflate(R.layout.fragment_step2, container, false);
 
-        spinnerStart(v);
+        //spinnerStart(v);
         mapStart();
         gpsStart(v);
 
@@ -95,19 +97,20 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
         mapFragment.getMapAsync(this);
     }
 
-    private void spinnerStart(View v){
+    private void spinnerStart(){
         spinner = v.findViewById(R.id.SpinerCountry);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.countries_array_name, android.R.layout.simple_spinner_item);
+        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.countries_array_name, android.R.layout.simple_spinner_item);*/
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrayNameCountries);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setSelection(ESPANA);
-        idCountry = spinner.getSelectedItemPosition();
+        spinner.setSelection(espanaPosition);
+        //idCountry = spinner.getSelectedItemPosition();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
-                idCountry = spinner.getSelectedItemPosition();
+                idCountry = arrayIdCountries[spinner.getSelectedItemPosition()];
+                Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -194,8 +197,9 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
         Uri baseUri = Contract.Country.CONTENT_URI_COUNTRY;
 
         String selection = null;
+        String sortOrder = Contract.Country.NAME_COUNTRY + " COLLATE LOCALIZED ASC";
 
-        return new CursorLoader(getActivity(), baseUri, columns, selection, null, null);
+        return new CursorLoader(getActivity(), baseUri, columns, selection, null, sortOrder);
     }
 
     @Override
@@ -213,17 +217,22 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
             int nameColumnIndexName = data.getColumnIndex(Contract.Country.NAME_COUNTRY);
             int i = 0;
 
-            do {
+            do{
                 arrayNameCountries[i]=data.getString(nameColumnIndexName);
                 arrayIdCountries[i]=data.getInt(nameColumnIndex);
+                if (arrayNameCountries[i].equals("España")){
+                    espanaPosition = i;
+                    idCountry = arrayIdCountries[i];
+                }
                 i++;
             }while (data.moveToNext());
-            
+
+            spinnerStart();
+
             Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getContext(), getString(R.string.fail_load_countries), Toast.LENGTH_LONG).show();
         }
-
     }
 
     @Override
