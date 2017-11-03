@@ -74,7 +74,7 @@
     <string name="text_description">Introduce una breve descripción</string>
     <string name="button_next">Siguiente</string>
 
-    <!-- Fragment StepB Step2 -->
+    <!-- Fragment StepA Step2 -->
     <string name="title_countries">Seleccione el país</string>
     <string name="gps">Añadir la ubicación GPS</string>
     <string name="send_step_a">Enviar</string>
@@ -82,11 +82,12 @@
     <string name="permission_denied">Debe dar permisos a la aplicación o habilitar el GPS, para añadir la ubicación GPS.</string>
     <string name="validate_location">Debe añadir la ubicación</string>
     <string name="fail_load_countries">No se ha podido cargar el listado de paises.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tag">Aviso</string>
     <string name="fail_save_advice">No se ha guardado el aviso por un error en el proveedor de contenidos</string>
     <string name="congrat_save_advice">Se ha guardado el aviso en el proveedor de contenidos</string>
+
+    <!-- Activity FinishAdvice-->
+    <string name="title_activity_finish_advice">Aviso enviado</string>
+    <string name="message_finish">Su aviso ha sido enviado.</string>
 
 </resources>

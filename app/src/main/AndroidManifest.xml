@@ -90,14 +90,25 @@
             android:name=".HelpActivity"
             android:label="@string/title_activity_help"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
-        <activity android:name=".resource.GPSPositionActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".resource.GPSPositionActivity" />
 
         <provider
-            android:authorities="es.jjsr.saveforest.contentProviderPackage.MyContentProvider"
             android:name=".contentProviderPackage.MyContentProvider"
+            android:authorities="es.jjsr.saveforest.contentProviderPackage.MyContentProvider"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <activity
+            android:name=".FinishAdviceActivity"
+            android:label="@string/title_activity_finish_advice"
+            android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.jjsr.saveforest.StartActivity" />
+        </activity>
     </application>
 
 </manifest>
