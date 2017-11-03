@@ -5,6 +5,8 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.net.Uri;
 
+import java.text.SimpleDateFormat;
+
 import es.jjsr.saveforest.dto.AdviceGlobal;
 
 /**
@@ -20,8 +22,12 @@ public class AdviceProvider {
 
         ContentValues values = new ContentValues();
 
+        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+        String dateString = originalFormat.format(adviceGlobal.getDate());
+        Integer date = Integer.valueOf(dateString);
+
         values.put(Contract.Advice.NAME, adviceGlobal.getName());
-        values.put(Contract.Advice.DATE, adviceGlobal.getDate().getTime()/1000);
+        values.put(Contract.Advice.DATE, date);
         values.put(Contract.Advice.DESCRIPTION, adviceGlobal.getDescription());
         values.put(Contract.Advice.ID_COUNTRY, adviceGlobal.getIdCountry());
         values.put(Contract.Advice.LATITUDE, adviceGlobal.getLatitude());

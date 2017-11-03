@@ -117,11 +117,14 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
                 Advice advice = new Advice();
                 advice.setId(Integer.parseInt(data.getString(data.getColumnIndex(Contract.Advice.ID_ADVICE))));
                 advice.setDescription(data.getString(data.getColumnIndex(Contract.Advice.DESCRIPTION)));
+                //advice.setDate(new Date (data.getInt(data.getColumnIndex(Contract.Advice.DATE))));
                 try {
-                    advice.setDate(originalFormat.parse(data.getString(data.getColumnIndex(Contract.Advice.DATE))));
+                    Date date = originalFormat.parse(data.getString(data.getColumnIndex(Contract.Advice.DATE)));
+                    advice.setDate(date);
                 } catch (ParseException e) {
-                    advice.setDate(new Date(1984, 10, 03));
-                    Log.e("Fecha ERROR", "Error al obtener la fecha de la base de datos");
+                    Integer failDate = 19841003;
+                    Date date = new Date(1984, 10, 03);
+                    advice.setDate(date);
                 }
                 advice.setLatitude(data.getDouble(data.getColumnIndex(Contract.Advice.LATITUDE)));
                 advice.setLongitude(data.getDouble(data.getColumnIndex(Contract.Advice.LONGITUDE)));

@@ -69,9 +69,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 Contract.Advice.ID_COUNTRY + ", " + Contract.Advice.PHONE_NUMBER + ", " +
                 Contract.Advice.LATITUDE + ", " + Contract.Advice.LONGITUDE + ", " +
                 Contract.Advice.NAME_IMAGE + ") " +
-                "VALUES ('Usuario de prueba 1', CURRENT_TIMESTAMP, 'Esto es una prueba precargada.', 1, 666777888, null, null, null), "
-                + "('Usuario de prueba 2', CURRENT_TIMESTAMP, 'Esto es una prueba precargada.', 3, null, 28.128041, -15.446438, null), "
-                + "('Usuario de prueba 3', CURRENT_TIMESTAMP, 'Esto es una prueba precargada.', 1, null, 28.127343, -15.446991, null)");
+                "VALUES ('Usuario de prueba 1', 19841003, 'Esto es una prueba precargada.', 1, 666777888, null, null, null), "
+                + "('Usuario de prueba 2', 19841003, 'Esto es una prueba precargada.', 3, null, 28.128041, -15.446438, null), "
+                + "('Usuario de prueba 3', 19841003, 'Esto es una prueba precargada.', 1, null, 28.127343, -15.446991, null)");
     }
 
     @Override
