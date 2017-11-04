@@ -1,5 +1,6 @@
 package es.jjsr.saveforest.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * Created by José Juan Sosa Rodríguez on 12/10/2017.
  */
 
-public class Advice {
+public class Advice implements Serializable{
 
     private String text;
 

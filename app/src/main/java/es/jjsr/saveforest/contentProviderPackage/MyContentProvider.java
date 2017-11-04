@@ -160,7 +160,7 @@ public class MyContentProvider extends ContentProvider {
             getContext().getContentResolver().notifyChange(rowUri, null);
             return rowUri;
         }
-        throw new SQLException("Failed to insert row into " + uri);
+        throw new SQLException("Failed to insertRecord row into " + uri);
     }
 
     @Override
@@ -184,7 +184,7 @@ public class MyContentProvider extends ContentProvider {
             getContext().getContentResolver().notifyChange(uri, null);
             return rows;
         }
-        throw new SQLException("Failed to delete row into " + uri);
+        throw new SQLException("Failed to deleteRecord row into " + uri);
     }
 
     @Override
@@ -209,6 +209,6 @@ public class MyContentProvider extends ContentProvider {
             getContext().getContentResolver().notifyChange(uri, null);
             return rows;
         }
-        throw new SQLException("Failed to update row into " + uri);
+        throw new SQLException("Failed to updateRecord row into " + uri);
     }
 }

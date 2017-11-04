@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionModeStyle">@style/ActionModeStyle</item>
+    </style>
+
+    <!-- Menu History Advice -->
+    <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="backgroundSplit">@color/colorAccent</item>
     </style>
 
     <!-- Main activity Text Style.-->
@@ -27,6 +37,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

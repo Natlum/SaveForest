@@ -90,4 +90,11 @@
     <string name="title_activity_finish_advice">Aviso enviado</string>
     <string name="message_finish">Su aviso ha sido enviado.</string>
 
+    <!-- Edit Advice from History Advices -->
+    <string name="context_menu_delete">Borrar</string>
+    <string name="context_menu_edit">Editar</string>
+    <string name="title_activity_update_advice">Actualizar aviso</string>
+    <string name="id_advice">Identificador de aviso: </string>
+    <string name="description">Descripción</string>
+
 </resources>

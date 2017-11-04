@@ -1,6 +1,7 @@
 package es.jjsr.saveforest.historyAdvicePackage;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,8 +12,11 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -25,6 +29,7 @@ import java.util.List;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.adapter.AdapterForRecyclerView;
+import es.jjsr.saveforest.contentProviderPackage.AdviceProvider;
 import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.dto.Advice;
 
@@ -40,6 +45,10 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
     private List<Advice> advices;
 
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
+
+    private ActionMode mActionMode;
+    private int idAdvice;
+    private int cardSelected;
 
 
     public HistoryAdviceListFragment() {
@@ -67,8 +76,21 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
         mAdapter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(getActivity(), "Se ha pulsado la tarjeta: " +
-                        mRecyclerView.getChildAdapterPosition(v), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getActivity(), "Se ha pulsado la tarjeta: " +
+                        mRecyclerView.getChildAdapterPosition(v), Toast.LENGTH_SHORT).show();*/
+            }
+        });
+        mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mActionMode != null){
+                    return false;
+                }
+                mActionMode = getActivity().startActionMode(mActionModeCallback);
+                view.setSelected(true);
+                idAdvice = advices.get(mRecyclerView.getChildAdapterPosition(view)).getId();
+                cardSelected = mRecyclerView.getChildAdapterPosition(view);
+                return true;
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -81,6 +103,41 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
         mCallbacks = this;
         getLoaderManager().initLoader(0, null, mCallbacks);
     }
+
+    ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            MenuInflater inflater = actionMode.getMenuInflater();
+            inflater.inflate(R.menu.menu_context, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            switch (menuItem.getItemId()){
+                case R.id.menu_delete:
+                    AdviceProvider.deleteRecord(getActivity().getContentResolver(), idAdvice);
+                    break;
+                case R.id.menu_edit:
+                    Intent intent = new Intent(getActivity(), UpdateAdviceActivity.class);
+                    intent.putExtra("adviceObject", advices.get(cardSelected));
+                    startActivity(intent);
+                    break;
+            }
+            mActionMode.finish();
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode actionMode) {
+            mActionMode = null;
+        }
+    };
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -117,12 +174,10 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
                 Advice advice = new Advice();
                 advice.setId(Integer.parseInt(data.getString(data.getColumnIndex(Contract.Advice.ID_ADVICE))));
                 advice.setDescription(data.getString(data.getColumnIndex(Contract.Advice.DESCRIPTION)));
-                //advice.setDate(new Date (data.getInt(data.getColumnIndex(Contract.Advice.DATE))));
                 try {
                     Date date = originalFormat.parse(data.getString(data.getColumnIndex(Contract.Advice.DATE)));
                     advice.setDate(date);
                 } catch (ParseException e) {
-                    Integer failDate = 19841003;
                     Date date = new Date(1984, 10, 03);
                     advice.setDate(date);
                 }
@@ -135,7 +190,7 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
 
             initializeAdapter();
 
-            Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getActivity(), getString(R.string.fail_load_countries), Toast.LENGTH_LONG).show();
         }

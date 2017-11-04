@@ -19,10 +19,11 @@ import es.jjsr.saveforest.dto.Advice;
 
 public class AdapterForRecyclerView
         extends RecyclerView.Adapter<AdapterForRecyclerView.ViewHolder>
-        implements View.OnClickListener{
+        implements View.OnClickListener, View.OnLongClickListener {
 
     List<Advice> advices;
     private View.OnClickListener listener;
+    private View.OnLongClickListener longListener;
 
     public AdapterForRecyclerView(List<Advice> advices) {
         this.advices = advices;
@@ -32,6 +33,7 @@ public class AdapterForRecyclerView
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_advice, parent, false);
         v.setOnClickListener(this);
+        v.setOnLongClickListener(this);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
@@ -58,10 +60,24 @@ public class AdapterForRecyclerView
         this.listener = listener;
     }
 
+    public void setOnLongClickListener(View.OnLongClickListener longListener){
+        this.longListener = longListener;
+    }
+
     @Override
     public void onClick(View view) {
         if (listener != null)
             listener.onClick(view);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        if (longListener != null){
+            longListener.onLongClick(view);
+            return true;
+        }else {
+            return false;
+        }
     }
 
 

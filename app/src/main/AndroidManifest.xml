@@ -48,16 +48,6 @@
                 android:value="es.jjsr.saveforest.StartActivity" />
         </activity>
         <activity
-            android:name=".FormStepAActivity_old"
-            android:label="@string/title_activity_form_step_a"
-            android:parentActivityName=".StartActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="es.jjsr.saveforest.StartActivity" />
-        </activity>
-        <activity
             android:name=".FormStepAActivity"
             android:label="@string/title_activity_form_step_a"
             android:parentActivityName=".StartActivity"
@@ -108,6 +98,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.StartActivity" />
+        </activity>
+        <activity
+            android:name=".historyAdvicePackage.UpdateAdviceActivity"
+            android:label="@string/title_activity_update_advice"
+            android:parentActivityName=".HistoryAdviceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.jjsr.saveforest.HistoryAdviceActivity" />
         </activity>
     </application>
 

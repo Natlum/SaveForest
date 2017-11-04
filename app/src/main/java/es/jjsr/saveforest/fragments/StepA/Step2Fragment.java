@@ -110,7 +110,7 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 idCountry = arrayIdCountries[spinner.getSelectedItemPosition()];
-                Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Se ha elegido el: " + i, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -229,7 +229,7 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
 
             spinnerStart();
 
-            Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getContext(), getString(R.string.fail_load_countries), Toast.LENGTH_LONG).show();
         }
