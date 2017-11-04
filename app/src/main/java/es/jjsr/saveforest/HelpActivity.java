@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/**
+ * Esta actividad es para cuando el usuario pulsa en el botón de ayuda del menú.
+ * Dependiendo de la actividad que se esté visualizando en ese instante, pararecerá un texto de ayuda acorde.
+ */
+
 public class HelpActivity extends AppCompatActivity {
 
     @Override

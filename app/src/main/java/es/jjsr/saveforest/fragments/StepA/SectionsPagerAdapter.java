@@ -10,6 +10,7 @@ import es.jjsr.saveforest.R;
 
 
 /**
+ * Se encarga de cargar los Fragments según esté seleccionado.
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */

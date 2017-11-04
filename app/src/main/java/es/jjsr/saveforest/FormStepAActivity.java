@@ -20,6 +20,10 @@ import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
 import es.jjsr.saveforest.fragments.StepA.ValidateContentStepA;
 import es.jjsr.saveforest.resource.InsertAdvice;
 
+/**
+ * Esta es la actividad que se ejecuta cuando se quiere enviar un aviso con información de gps, foto...
+ */
+
 public class FormStepAActivity extends AppCompatActivity {
 
     /**

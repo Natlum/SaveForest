@@ -12,6 +12,8 @@ import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 
 /**
+ * Proveedor de acceso a la tabla Advice.
+ * Contiene lo necesario para hacer un CRUD
  * Created by José Juan Sosa Rodríguez on 01/11/2017.
  */
 

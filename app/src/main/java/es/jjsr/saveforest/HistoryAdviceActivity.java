@@ -10,6 +10,10 @@ import android.view.MenuItem;
 
 import es.jjsr.saveforest.historyAdvicePackage.HistoryAdviceListFragment;
 
+/**
+ * Esta actividad carga un Fragment con el listado de avisos.
+ */
+
 public class HistoryAdviceActivity extends AppCompatActivity {
 
 

@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
+ * Contiene la información necesaria para conectarse a la base de datos.
  * Created by José Juan Sosa Rodríguez on 29/10/2017.
  */
 

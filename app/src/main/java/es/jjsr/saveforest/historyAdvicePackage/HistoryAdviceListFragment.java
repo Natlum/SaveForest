@@ -34,6 +34,7 @@ import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.dto.Advice;
 
 /**
+ * Contiene lo necesario para mostrar el listado de avisos.
  * A simple {@link Fragment} subclass.
  */
 public class HistoryAdviceListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{

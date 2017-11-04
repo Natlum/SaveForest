@@ -23,6 +23,7 @@ import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.contentProviderPackage.Contract;
 
 /**
+ * Contiene lo necesario para manejar el formulario de nuevo aviso que requiere un número de teléfono.
  * A simple {@link Fragment} subclass.
  */
 public class StepBFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -126,7 +127,7 @@ public class StepBFragment extends Fragment implements LoaderManager.LoaderCallb
 
             spinnerStart();
 
-            Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getActivity(), getString(R.string.fail_load_countries), Toast.LENGTH_LONG).show();
         }

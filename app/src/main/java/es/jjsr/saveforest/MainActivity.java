@@ -12,6 +12,7 @@ import es.jjsr.saveforest.resource.ResetAdviceGlobal;
 /**
  * Aplicación creada por José Juan Sosa Rodríguez
  * Esta es la actividad que muestra la pantalla de inicio y luego carga la actividad principal.
+ * También pone los valores por defecto de la Clase AdviceGlobal.
  */
 
 public class MainActivity extends AppCompatActivity {

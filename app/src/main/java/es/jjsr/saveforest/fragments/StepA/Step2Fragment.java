@@ -37,6 +37,7 @@ import es.jjsr.saveforest.resource.GPSPositionActivity;
 import static android.app.Activity.RESULT_OK;
 
 /**
+ * Contiene lo necesario para manejar el paso 2 en el formulario de nuevo aviso.
  * A simple {@link Fragment} subclass.
  */
 public class Step2Fragment extends Fragment implements OnMapReadyCallback, LoaderManager.LoaderCallbacks<Cursor>{

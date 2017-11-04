@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.Date;
 
 /**
+ * Contiene lo necesario para crear la base de datos con sus tablas.
+ * También inserta información por defecto en las tablas.
  * Created by José Juan Sosa Rodríguez on 29/10/2017.
  */
 

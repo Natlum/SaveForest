@@ -18,7 +18,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
- * Esta es la actividad principal, contiene el menú lateral
+ * Esta es la actividad principal, contiene el menú lateral.
+ * Y el inicio para insertar un nuevo aviso.
  * @author José Juan Sosa Rodríguez
  */
 

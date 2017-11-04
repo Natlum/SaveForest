@@ -14,6 +14,7 @@ import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 
 /**
+ * Contiene lo necesario para manejar el paso 1 en el formulario de nuevo aviso.
  * A simple {@link Fragment} subclass.
  */
 public class Step1Fragment extends Fragment {

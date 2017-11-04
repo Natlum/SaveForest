@@ -11,6 +11,10 @@ import android.widget.TextView;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.resource.ResetAdviceGlobal;
 
+/**
+ * Esta actividad se muestra cuando se ha guardado el aviso en la base de datos.
+ * Al final se ponen los valores por defecto en la clase AdviceGlobal para así volverla a usar.
+ */
 public class FinishAdviceActivity extends AppCompatActivity {
 
     @Override

@@ -14,6 +14,10 @@ import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.contentProviderPackage.AdviceProvider;
 import es.jjsr.saveforest.dto.Advice;
 
+/**
+ * Actividad que permitirá modificar la descripción del aviso y guardarla.
+ */
+
 public class UpdateAdviceActivity extends AppCompatActivity {
 
     private TextView idTextView;

@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.util.SparseArray;
 
 /**
+ * Proveedor de contenidos.
  * Created by José Juan Sosa Rodríguez on 29/10/2017.
  */
 

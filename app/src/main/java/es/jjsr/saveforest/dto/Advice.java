@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Esta clase es para usarla en un listado de objetos con valores obtenidos de la base de datos
+ * Implementa Serializable para pasar objetos de este tipo de clase a otras actividades.
  * Created by José Juan Sosa Rodríguez on 12/10/2017.
  */
 

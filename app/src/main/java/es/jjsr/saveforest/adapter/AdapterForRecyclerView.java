@@ -14,6 +14,7 @@ import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
 
 /**
+ * Adaptador para crear las tarjetas de los avisos con la información de la base de datos.
  * Created by José Juan Sosa Rodríguez on 12/10/2017.
  */
 

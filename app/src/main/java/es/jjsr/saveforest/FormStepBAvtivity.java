@@ -19,7 +19,7 @@ import es.jjsr.saveforest.fragments.StepB.ValidateContentStepB;
 import es.jjsr.saveforest.resource.InsertAdvice;
 
 /**
- * Esta actividad es para cuando el usuario, ha elegido que lo llamen
+ * Esta actividad es para cuando el usuario, ha elegido que lo llamen a la hora de hacer un aviso nuevo.
  * @author José Juan Sosa Rodríguez
  */
 
