@@ -11,14 +11,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 
 import java.util.Date;
 
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
-import es.jjsr.saveforest.fragments.StepA.ValidateContent;
+import es.jjsr.saveforest.fragments.StepA.ValidateContentStepA;
 import es.jjsr.saveforest.resource.InsertAdvice;
 
 public class FormStepAActivity extends AppCompatActivity {
@@ -78,8 +77,8 @@ public class FormStepAActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ValidateContent validateContent = new ValidateContent(mSectionsPagerAdapter, getApplicationContext());
-                if (validateContent.getEndValue()){
+                ValidateContentStepA validateContentStepA = new ValidateContentStepA(mSectionsPagerAdapter, getApplicationContext());
+                if (validateContentStepA.getEndValue()){
                     saveContents();
                 }
             }

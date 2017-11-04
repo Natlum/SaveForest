@@ -1,49 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="es.jjsr.saveforest.FormStepBAvtivity"
     tools:showIn="@layout/activity_form_step_b">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:alpha="0.3"
-        app:srcCompat="@drawable/background_end" />
+        android:id="@+id/fragment_advice_stepB"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            style="@style/MainActivityStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/thanks" />
-
-        <TextView
-            android:id="@+id/textName"
-            style="@style/MainActivityStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:text="nombre introducido" />
-
-        <TextView
-            style="@style/MainActivityStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/message" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

@@ -24,6 +24,10 @@ public class FinishAdviceActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.textNameFinish);
         textView.setText(((AdviceGlobal) getApplication()).getName());
+        TextView call = (TextView) findViewById(R.id.txtViewCall);
+        if (((AdviceGlobal) getApplication()).getPhoneNumber()!= 0){
+            call.setText(getString(R.string.message));
+        }
 
         new ResetAdviceGlobal(this);
     }

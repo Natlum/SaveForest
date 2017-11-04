@@ -2,18 +2,30 @@ package es.jjsr.saveforest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.Date;
+
+import es.jjsr.saveforest.dto.AdviceGlobal;
+import es.jjsr.saveforest.fragments.StepB.StepBFragment;
+import es.jjsr.saveforest.fragments.StepB.ValidateContentStepB;
+import es.jjsr.saveforest.resource.InsertAdvice;
 
 /**
  * Esta actividad es para cuando el usuario, ha elegido que lo llamen
  * @author José Juan Sosa Rodríguez
  */
 
-public class FormStepBAvtivity extends AppCompatActivity {
+public class FormStepBAvtivity extends AppCompatActivity{
+
+    private StepBFragment stepBFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +36,45 @@ public class FormStepBAvtivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getIntentReceived();
+        stepBFragment = new StepBFragment();
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_advice_stepB, stepBFragment);
+        transaction.commit();
+
+        getIntentReceived();
+        initElements();
+
+    }
+
+    private void initElements(){
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingButtonSendStepB);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ValidateContentStepB validateContentStepB = new ValidateContentStepB(getApplicationContext(), stepBFragment);
+                if (validateContentStepB.getEndValue()){
+                    saveContents();
+                }
+            }
+        });
     }
 
     private void getIntentReceived(){
         Intent intent = this.getIntent();
         final String name = intent.getExtras().getString("name");
-        final TextView textName = (TextView) findViewById(R.id.textName);
-        textName.setText(name);
+        AdviceGlobal adviceGlobal = (AdviceGlobal) getApplication();
+        adviceGlobal.setName(name);
+    }
+
+    private void saveContents(){
+        ((AdviceGlobal) getApplication()).setDescription(String.valueOf(stepBFragment.getDescription().getText()));
+        ((AdviceGlobal) getApplication()).setIdCountry(stepBFragment.getIdCountry());
+        ((AdviceGlobal) getApplication()).setPhoneNumber(Integer.valueOf(String.valueOf(stepBFragment.getPhoneNumber().getText())));
+        ((AdviceGlobal) getApplication()).setDate(new Date());
+        new InsertAdvice(this, getContentResolver());
+        finish();
+        //Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -61,4 +103,6 @@ public class FormStepBAvtivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

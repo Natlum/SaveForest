@@ -50,6 +50,7 @@
             android:text="nombre introducido" />
 
         <TextView
+            android:id="@+id/txtViewCall"
             style="@style/MainActivityStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

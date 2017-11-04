@@ -13,7 +13,7 @@ import es.jjsr.saveforest.R;
  * Created by José Juan Sosa Rodríguez on 22/10/2017.
  */
 
-public class ValidateContent {
+public class ValidateContentStepA {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private Context ctx;
@@ -23,7 +23,7 @@ public class ValidateContent {
         return endValue;
     }
 
-    public ValidateContent(SectionsPagerAdapter sectionsPagerAdapter, Context context) {
+    public ValidateContentStepA(SectionsPagerAdapter sectionsPagerAdapter, Context context) {
         this.sectionsPagerAdapter = sectionsPagerAdapter;
         this.ctx = context;
         validate();
