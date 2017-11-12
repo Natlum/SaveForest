@@ -1,7 +1,10 @@
 package es.jjsr.saveforest.fragments.StepA;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import es.jjsr.saveforest.R;
-import es.jjsr.saveforest.dto.AdviceGlobal;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Contiene lo necesario para manejar el paso 1 en el formulario de nuevo aviso.
@@ -21,7 +25,9 @@ public class Step1Fragment extends Fragment {
 
 
     private EditText description;
-    private ImageView photo;
+    private ImageView viewPhoto;
+    private String namePhoto = null;
+    private final int PETITION_TAKE_A_PICTURE = 1;
 
     public EditText getDescription() {
         return description;
@@ -31,12 +37,20 @@ public class Step1Fragment extends Fragment {
         this.description = description;
     }
 
-    public ImageView getPhoto() {
-        return photo;
+    public ImageView getViewPhoto() {
+        return viewPhoto;
     }
 
-    public void setPhoto(ImageView photo) {
-        this.photo = photo;
+    public void setViewPhoto(ImageView viewPhoto) {
+        this.viewPhoto = viewPhoto;
+    }
+
+    public String getNamePhoto() {
+        return namePhoto;
+    }
+
+    public void setNamePhoto(String namePhoto) {
+        this.namePhoto = namePhoto;
     }
 
     public Step1Fragment() {
@@ -65,5 +79,33 @@ public class Step1Fragment extends Fragment {
 
     private void initElements(View v){
         description = (EditText) v.findViewById(R.id.editTextDescription);
+        viewPhoto = (ImageView) v.findViewById(R.id.imageFromCamera);
+        Button cameraButton = (Button) v.findViewById(R.id.buttonCamera);
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takeAPicture();
+            }
+        });
+    }
+
+    private void takeAPicture() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, PETITION_TAKE_A_PICTURE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case PETITION_TAKE_A_PICTURE:
+                if (resultCode == RESULT_OK){
+                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+                    viewPhoto.setImageBitmap(photo);
+                }
+                break;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
