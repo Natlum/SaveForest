@@ -26,8 +26,8 @@ public class Step1Fragment extends Fragment {
 
     private EditText description;
     private ImageView viewPhoto;
-    private String namePhoto = null;
     private final int PETITION_TAKE_A_PICTURE = 1;
+    Bitmap photo = null;
 
     public EditText getDescription() {
         return description;
@@ -45,12 +45,12 @@ public class Step1Fragment extends Fragment {
         this.viewPhoto = viewPhoto;
     }
 
-    public String getNamePhoto() {
-        return namePhoto;
+    public Bitmap getPhoto() {
+        return photo;
     }
 
-    public void setNamePhoto(String namePhoto) {
-        this.namePhoto = namePhoto;
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
     }
 
     public Step1Fragment() {
@@ -100,7 +100,7 @@ public class Step1Fragment extends Fragment {
         switch (requestCode){
             case PETITION_TAKE_A_PICTURE:
                 if (resultCode == RESULT_OK){
-                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+                    photo = (Bitmap) data.getExtras().get("data");
                     viewPhoto.setImageBitmap(photo);
                 }
                 break;

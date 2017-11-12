@@ -11,14 +11,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
 import es.jjsr.saveforest.fragments.StepA.ValidateContentStepA;
 import es.jjsr.saveforest.resource.InsertAdvice;
+import es.jjsr.saveforest.resource.LoadAnsSaveImage;
 
 /**
  * Esta es la actividad que se ejecuta cuando se quiere enviar un aviso con información de gps, foto...
@@ -35,6 +39,7 @@ public class FormStepAActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private String fileImageName = null;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -90,16 +95,34 @@ public class FormStepAActivity extends AppCompatActivity {
     }
 
     private void saveContents(){
+        savePhoto();
         ((AdviceGlobal) getApplication()).setDescription(String.valueOf(mSectionsPagerAdapter.getStep1()
                 .getDescription().getText()));
         ((AdviceGlobal) getApplication()).setIdCountry(mSectionsPagerAdapter.getStep2().getIdCountry());
         ((AdviceGlobal) getApplication()).setLatitude(mSectionsPagerAdapter.getStep2().getLatitude());
         ((AdviceGlobal) getApplication()).setLongitude(mSectionsPagerAdapter.getStep2().getLongitude());
-        ((AdviceGlobal) getApplication()).setNameImage(null);
+        ((AdviceGlobal) getApplication()).setNameImage(fileImageName);
         ((AdviceGlobal) getApplication()).setDate(new Date());
         new InsertAdvice(this, getContentResolver());
         finish();
         //Toast.makeText(this, "Se ha guardado el aviso ", Toast.LENGTH_LONG).show();
+    }
+
+    private void savePhoto() {
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+        String formatedDate = newFormat.format(new Date());
+
+        if (mSectionsPagerAdapter.getStep1().getPhoto() != null){
+            try {
+                fileImageName = "SaveForest-" + formatedDate + ".jpg";
+                LoadAnsSaveImage.saveImage(mSectionsPagerAdapter.getStep1().getPhoto(), this, fileImageName);
+            } catch (IOException e) {
+                fileImageName = null;
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.fail_save_image_file),
+                        Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

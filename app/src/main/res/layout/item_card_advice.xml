@@ -14,6 +14,7 @@
         card_view:cardPreventCornerOverlap="false">
 
         <ImageView
+            android:id="@+id/imageViewCardAdvice"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/country_road_card"

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,10 +19,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
+import es.jjsr.saveforest.resource.LoadAnsSaveImage;
 
 /**
  * Contiene lo necesario para mostrar el contenido de un aviso seleccionado.
@@ -50,6 +54,7 @@ public class ShowAdviceActivity extends AppCompatActivity implements OnMapReadyC
 
         initBasicElements();
         initMaps();
+        initImage();
     }
 
     private void initMaps() {
@@ -107,6 +112,24 @@ public class ShowAdviceActivity extends AppCompatActivity implements OnMapReadyC
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(getString(R.string.mark_show_advice)+ latitude + ", " + longitude +")"));
+    }
+
+    private void initImage(){
+        if (advice.getNameImage() != null){
+            ImageView imageViewAdvice = (ImageView) findViewById(R.id.imageViewAdvice);
+            try {
+                LoadAnsSaveImage.loadImageFromStorage(this, advice.getNameImage(), imageViewAdvice);
+            } catch (FileNotFoundException e) {
+                Toast.makeText(this, getResources().getString(R.string.fail_load_image_from_file),
+                        Toast.LENGTH_LONG).show();
+                LinearLayout layout = (LinearLayout) findViewById(R.id.layoutImageViewAdvice);
+                layout.setVisibility(View.GONE);
+                e.printStackTrace();
+            }
+        }else {
+            LinearLayout layout = (LinearLayout) findViewById(R.id.layoutImageViewAdvice);
+            layout.setVisibility(View.GONE);
+        }
     }
 
 }

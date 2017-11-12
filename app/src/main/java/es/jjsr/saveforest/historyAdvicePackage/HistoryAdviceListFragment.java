@@ -86,7 +86,7 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
             textAdvicesIsEmpty.setVisibility(View.VISIBLE);
         }else {
             textAdvicesIsEmpty.setVisibility(View.GONE);
-            mAdapter = new AdapterForRecyclerView(advices);
+            mAdapter = new AdapterForRecyclerView(advices, getActivity());
             mAdapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

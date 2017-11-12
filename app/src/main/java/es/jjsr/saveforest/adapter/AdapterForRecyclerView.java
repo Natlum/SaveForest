@@ -1,17 +1,21 @@
 package es.jjsr.saveforest.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
+import es.jjsr.saveforest.resource.LoadAnsSaveImage;
 
 /**
  * Adaptador para crear las tarjetas de los avisos con la información de la base de datos.
@@ -25,9 +29,11 @@ public class AdapterForRecyclerView
     List<Advice> advices;
     private View.OnClickListener listener;
     private View.OnLongClickListener longListener;
+    private Context ctx;
 
-    public AdapterForRecyclerView(List<Advice> advices) {
+    public AdapterForRecyclerView(List<Advice> advices, Context ctx) {
         this.advices = advices;
+        this.ctx = ctx;
     }
 
     @Override
@@ -45,6 +51,13 @@ public class AdapterForRecyclerView
         String formatedDate = newFormat.format(advices.get(position).getDate());
         String tag = advices.get(position).getId() + " " + formatedDate;
         holder.textView.setText(tag);
+        if (advices.get(position).getNameImage() != null){
+            try {
+                LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -88,11 +101,13 @@ public class AdapterForRecyclerView
 
         CardView cardView;
         TextView textView;
+        ImageView imageViewCardAdvice;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView)itemView.findViewById(R.id.item_card_view);
             textView = (TextView)itemView.findViewById(R.id.textTitleCardView);
+            imageViewCardAdvice = (ImageView)itemView.findViewById(R.id.imageViewCardAdvice);
         }
     }
 

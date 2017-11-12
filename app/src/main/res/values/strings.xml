@@ -99,5 +99,7 @@
     <string name="date">Fecha</string>
     <string name="location">Ubicación</string>
     <string name="mark_show_advice">La ubicación del aviso es:</string>
+    <string name="fail_save_image_file">Se ha producido un error al intentar guardar la imagen en el dispositivo.</string>
+    <string name="fail_load_image_from_file">Error al cargar la imagen del aviso.</string>
 
 </resources>
