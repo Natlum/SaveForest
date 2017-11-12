@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     tools:context="es.jjsr.saveforest.historyAdvicePackage.HistoryAdviceListFragment">
 
+    <TextView
+        android:id="@+id/textAdvicesEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/advices_is_empty"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_items"

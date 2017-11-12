@@ -22,6 +22,12 @@ import java.text.SimpleDateFormat;
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
 
+/**
+ * Contiene lo necesario para mostrar el contenido de un aviso seleccionado.
+ * Si el aviso no tiene imagen, ocultará esa opción.
+ * Si el aviso no tiene ubicación GPS, ocultará esa opticón.
+ */
+
 public class ShowAdviceActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private Advice advice;

@@ -12,6 +12,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -35,6 +37,8 @@ import es.jjsr.saveforest.dto.Advice;
 
 /**
  * Contiene lo necesario para mostrar el listado de avisos.
+ * Si se hace clic sobre algún aviso, se abrirá una actividad que muestra el contenido.
+ * Si se hace un longclic sobre algún aviso, se mostrará un menú contextual para editar o eliminar el aviso.
  * A simple {@link Fragment} subclass.
  */
 public class HistoryAdviceListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -51,6 +55,8 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
     private int idAdvice;
     private int cardSelected;
 
+    private TextView textAdvicesIsEmpty;
+
 
     public HistoryAdviceListFragment() {
         // Required empty public constructor
@@ -63,6 +69,8 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_history_advice_list, container, false);
 
+        textAdvicesIsEmpty = (TextView) v.findViewById(R.id.textAdvicesEmpty);
+
         mRecyclerView = v.findViewById(R.id.recycler_view_items);
         mRecyclerView.setHasFixedSize(true);
 
@@ -73,30 +81,36 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
     }
 
     private void initializeAdapter(){
-        mAdapter = new AdapterForRecyclerView(advices);
-        mAdapter.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                cardSelected = mRecyclerView.getChildAdapterPosition(v);
-                Intent intent = new Intent(getActivity(), ShowAdviceActivity.class);
-                intent.putExtra("adviceObject", advices.get(cardSelected));
-                startActivity(intent);
-            }
-        });
-        mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if (mActionMode != null){
-                    return false;
+        if (advices.isEmpty()){
+            mRecyclerView.setVisibility(View.GONE);
+            textAdvicesIsEmpty.setVisibility(View.VISIBLE);
+        }else {
+            textAdvicesIsEmpty.setVisibility(View.GONE);
+            mAdapter = new AdapterForRecyclerView(advices);
+            mAdapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cardSelected = mRecyclerView.getChildAdapterPosition(v);
+                    Intent intent = new Intent(getActivity(), ShowAdviceActivity.class);
+                    intent.putExtra("adviceObject", advices.get(cardSelected));
+                    startActivity(intent);
                 }
-                mActionMode = getActivity().startActionMode(mActionModeCallback);
-                view.setSelected(true);
-                idAdvice = advices.get(mRecyclerView.getChildAdapterPosition(view)).getId();
-                cardSelected = mRecyclerView.getChildAdapterPosition(view);
-                return true;
-            }
-        });
-        mRecyclerView.setAdapter(mAdapter);
+            });
+            mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (mActionMode != null) {
+                        return false;
+                    }
+                    mActionMode = getActivity().startActionMode(mActionModeCallback);
+                    view.setSelected(true);
+                    idAdvice = advices.get(mRecyclerView.getChildAdapterPosition(view)).getId();
+                    cardSelected = mRecyclerView.getChildAdapterPosition(view);
+                    return true;
+                }
+            });
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 
     @Override
@@ -172,26 +186,29 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
             data.moveToFirst();
 
             SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
-
-            do{
-                Advice advice = new Advice();
-                advice.setId(Integer.parseInt(data.getString(data.getColumnIndex(Contract.Advice.ID_ADVICE))));
-                advice.setDescription(data.getString(data.getColumnIndex(Contract.Advice.DESCRIPTION)));
-                try {
-                    Date date = originalFormat.parse(data.getString(data.getColumnIndex(Contract.Advice.DATE)));
-                    advice.setDate(date);
-                } catch (ParseException e) {
-                    Date date = new Date(1984, 10, 03);
-                    advice.setDate(date);
-                }
-                advice.setLatitude(data.getDouble(data.getColumnIndex(Contract.Advice.LATITUDE)));
-                advice.setLongitude(data.getDouble(data.getColumnIndex(Contract.Advice.LONGITUDE)));
-                advice.setIdCountry(data.getInt(data.getColumnIndex(Contract.Advice.ID_COUNTRY)));
-                advice.setNameImage(data.getString(data.getColumnIndex(Contract.Advice.NAME_IMAGE)));
-                advices.add(advice);
-            }while (data.moveToNext());
-
-            initializeAdapter();
+            try {
+                do{
+                    Advice advice = new Advice();
+                    advice.setId(Integer.parseInt(data.getString(data.getColumnIndex(Contract.Advice.ID_ADVICE))));
+                    advice.setDescription(data.getString(data.getColumnIndex(Contract.Advice.DESCRIPTION)));
+                    try {
+                        Date date = originalFormat.parse(data.getString(data.getColumnIndex(Contract.Advice.DATE)));
+                        advice.setDate(date);
+                    } catch (ParseException e) {
+                        Date date = new Date(1984, 10, 03);
+                        advice.setDate(date);
+                    }
+                    advice.setLatitude(data.getDouble(data.getColumnIndex(Contract.Advice.LATITUDE)));
+                    advice.setLongitude(data.getDouble(data.getColumnIndex(Contract.Advice.LONGITUDE)));
+                    advice.setIdCountry(data.getInt(data.getColumnIndex(Contract.Advice.ID_COUNTRY)));
+                    advice.setNameImage(data.getString(data.getColumnIndex(Contract.Advice.NAME_IMAGE)));
+                    advices.add(advice);
+                }while (data.moveToNext());
+            }catch (Exception e){
+                Log.e("Fail Advices", "Error al cargar los avisos");
+            }finally {
+                initializeAdapter();
+            }
 
             //Toast.makeText(getActivity(), "Datos cargados de la Base de datos", Toast.LENGTH_LONG).show();
         }else{

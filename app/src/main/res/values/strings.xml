@@ -92,11 +92,12 @@
     <string name="title_activity_update_advice">Actualizar aviso</string>
     <string name="id_advice">Identificador de aviso: </string>
     <string name="description">Descripción</string>
+    <string name="advices_is_empty">El historial de avisos está vacío</string>
 
     <!-- Show Advice from History Advices -->
     <string name="title_activity_show_advice">Aviso nº:</string>
     <string name="date">Fecha</string>
     <string name="location">Ubicación</string>
-    <string name="title_activity_show_map">MostrarMapa</string>
     <string name="mark_show_advice">La ubicación del aviso es:</string>
+
 </resources>
