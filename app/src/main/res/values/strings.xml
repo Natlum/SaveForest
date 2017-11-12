@@ -29,6 +29,7 @@
     <string name="thanks">Muchas gracias</string>
     <string name="message">En breve recibirá una llamada.</string>
     <string name="phone_number">Su número de teléfono aquí</string>
+    <string name="phone_number_title">Número de teléfono</string>
 
     <!-- Activity FormStepA -->
     <string name="title_activity_form_step_a">Formulario de aviso</string>
@@ -92,9 +93,10 @@
     <string name="id_advice">Identificador de aviso: </string>
     <string name="description">Descripción</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="phone_number_title">Número de teléfono</string>
-
-
+    <!-- Show Advice from History Advices -->
+    <string name="title_activity_show_advice">Aviso nº:</string>
+    <string name="date">Fecha</string>
+    <string name="location">Ubicación</string>
+    <string name="title_activity_show_map">MostrarMapa</string>
+    <string name="mark_show_advice">La ubicación del aviso es:</string>
 </resources>

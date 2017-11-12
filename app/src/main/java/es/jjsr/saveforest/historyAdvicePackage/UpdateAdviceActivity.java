@@ -47,8 +47,8 @@ public class UpdateAdviceActivity extends AppCompatActivity {
     }
 
     private void initializeElements() {
-        idTextView = findViewById(R.id.textViewIdAdvice);
-        editTextDescription = findViewById(R.id.updateTextDescription);
+        idTextView = (TextView) findViewById(R.id.textViewIdAdvice);
+        editTextDescription = (EditText) findViewById(R.id.updateTextDescription);
 
         idTextView.setText(idTextView.getText() + String.valueOf(advice.getId()));
         editTextDescription.setText(advice.getDescription());

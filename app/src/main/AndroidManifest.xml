@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+
     <application
         android:name=".dto.AdviceGlobal"
         android:allowBackup="true"
@@ -22,6 +26,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6Y9tZqhIM53fUrGcneX_lZgB7MBTzKiI" />
+
 
         <activity
             android:name=".MainActivity"
@@ -104,6 +109,15 @@
             android:label="@string/title_activity_update_advice"
             android:parentActivityName=".HistoryAdviceActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.jjsr.saveforest.HistoryAdviceActivity" />
+        </activity>
+        <activity
+            android:name=".historyAdvicePackage.ShowAdviceActivity"
+            android:label="@string/title_activity_show_advice"
+            android:parentActivityName=".HistoryAdviceActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

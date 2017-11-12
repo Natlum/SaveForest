@@ -77,8 +77,10 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
         mAdapter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*Toast.makeText(getActivity(), "Se ha pulsado la tarjeta: " +
-                        mRecyclerView.getChildAdapterPosition(v), Toast.LENGTH_SHORT).show();*/
+                cardSelected = mRecyclerView.getChildAdapterPosition(v);
+                Intent intent = new Intent(getActivity(), ShowAdviceActivity.class);
+                intent.putExtra("adviceObject", advices.get(cardSelected));
+                startActivity(intent);
             }
         });
         mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
