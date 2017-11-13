@@ -19,16 +19,35 @@ import java.io.IOException;
 
 public class LoadAnsSaveImage {
 
+    private final static String NAME_FOLDER_IMAGES = "Images";
+
     public static void loadImageFromStorage(Context ctx, String fileName, ImageView imageView) throws FileNotFoundException {
-        File file = ctx.getFileStreamPath(fileName);
+        //File file = ctx.getFileStreamPath(fileName);
+        File file = new File(ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName);
         Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
         imageView.setImageBitmap(bitmap);
     }
 
     public static void saveImage(Bitmap image, Context ctx, String fileName) throws IOException {
-        FileOutputStream fileOutputStream = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
+        /*FileOutputStream fileOutputStream = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
         image.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
-        fileOutputStream.close();
+        fileOutputStream.close();*/
+        File folder = new File(ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES);
+        if (!folder.exists()){
+            folder.mkdir();
+        }
+
+        File file = new File(ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName);
+
+        FileOutputStream outputStream;
+
+        if (!file.exists()){
+            file.createNewFile();
+        }
+
+        outputStream = new FileOutputStream(file);
+        image.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        outputStream.close();
     }
 
 }
