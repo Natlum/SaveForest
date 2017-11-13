@@ -17,6 +17,8 @@ import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.resource.LoadAnsSaveImage;
 
+import static es.jjsr.saveforest.R.drawable.country_road_card;
+
 /**
  * Adaptador para crear las tarjetas de los avisos con la información de la base de datos.
  * Created by José Juan Sosa Rodríguez on 12/10/2017.
@@ -55,6 +57,7 @@ public class AdapterForRecyclerView
             try {
                 LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
             } catch (FileNotFoundException e) {
+                holder.imageViewCardAdvice.setImageResource(R.drawable.country_road_card);
                 e.printStackTrace();
             }
         }
