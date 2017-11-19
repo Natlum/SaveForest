@@ -1,6 +1,7 @@
 package es.jjsr.saveforest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import es.jjsr.saveforest.resource.DownloadManualAsyncTask;
 
 /**
  * Esta es la actividad principal, contiene el menú lateral.
@@ -143,10 +146,23 @@ public class StartActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_download){
+            downloadManual();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void downloadManual(){
+        String urlToDownload = "https://jjsr.es/wp-content/uploads/2017/07/cv_jjsr.pdf";
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage(getResources().getString(R.string.message_downloading));
+        progressDialog.setProgress(0);
+        progressDialog.setMax(100);
+        new DownloadManualAsyncTask(getApplicationContext(), progressDialog).execute(urlToDownload);
     }
 }

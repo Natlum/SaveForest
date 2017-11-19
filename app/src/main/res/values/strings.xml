@@ -9,6 +9,7 @@
     <string name="new_advice">Nuevo aviso</string>
     <string name="history_advice">Historial de avisos</string>
     <string name="aboutUs">Acerca de &#8230;</string>
+    <string name="download">Descargar el manual</string>
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
 
@@ -101,5 +102,13 @@
     <string name="mark_show_advice">La ubicación del aviso es:</string>
     <string name="fail_save_image_file">Se ha producido un error al intentar guardar la imagen en el dispositivo.</string>
     <string name="fail_load_image_from_file">Error al cargar la imagen del aviso.</string>
+
+    <!-- Download Manual -->
+    <string name="fail_connection_download">Conexíon de la descarga del manual no realizada correctamente</string>
+    <string name="correct_connection_download">Se realizó la descarga correctamente</string>
+    <string name="message_downloading">Descargando PDF...</string>
+    <string name="not_found_pdf_viewer">Debe tener instalado un visor PDF para poder abrir el manual.</string>
+    <string name="fail_save_manual">Error al guardar el documento</string>
+
 
 </resources>
