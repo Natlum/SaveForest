@@ -4,13 +4,15 @@ import android.app.Application;
 
 import java.util.Date;
 
+import es.jjsr.saveforest.resource.ApplicationGlobal;
+
 /**
  * Esta es la class que se usará de manera global en la aplicación,
  * para ir guardando los datos antes de enviarlos a la base de datos.
  * Created by José Juan Sosa Rodríguez on 22/10/2017.
  */
 
-public class AdviceGlobal extends Application{
+public class AdviceGlobal extends ApplicationGlobal{
 
     private String name;
     private String description;

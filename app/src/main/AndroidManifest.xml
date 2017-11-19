@@ -92,7 +92,8 @@
             android:name=".contentProviderPackage.MyContentProvider"
             android:authorities="es.jjsr.saveforest.contentProviderPackage.MyContentProvider"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:syncable="true"/>
 
         <activity
             android:name=".FinishAdviceActivity"
