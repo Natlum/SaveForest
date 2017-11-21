@@ -30,7 +30,7 @@ public class MyContentProvider extends ContentProvider {
     private SQLiteDatabase sqlDB;
     public DataBaseHelper dbHelper;
     private static final String DATABASE_NAME = "SaveForest.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String ADVICE_TABLE_NAME = "Advice";
     private static final String COUNTRY_TABLE_NAME = "Country";
