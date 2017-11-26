@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import es.jjsr.saveforest.resource.ResetAdviceGlobal;
+import es.jjsr.saveforest.resource.UpdateCountryTable;
 
 /**
  * Aplicación creada por José Juan Sosa Rodríguez
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         new ResetAdviceGlobal(this);
+        new UpdateCountryTable();
 
         mHandler = new Handler();
         try {
