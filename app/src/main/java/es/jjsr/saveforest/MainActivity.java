@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         new ResetAdviceGlobal(this);
-        new UpdateCountryTable();
+        new UpdateCountryTable(getContentResolver(), this);
 
         mHandler = new Handler();
         try {

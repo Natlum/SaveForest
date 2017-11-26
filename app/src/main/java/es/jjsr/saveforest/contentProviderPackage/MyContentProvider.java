@@ -151,6 +151,8 @@ public class MyContentProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)){
             case ADVICE_ALL_REG:
                 table = ADVICE_TABLE_NAME;
+            case COUNTRY_ALL_REG:
+                table = COUNTRY_TABLE_NAME;
                 break;
         }
 
@@ -178,6 +180,9 @@ public class MyContentProvider extends ContentProvider {
                 break;
             case ADVICE_ALL_REG:
                 table = ADVICE_TABLE_NAME;
+                break;
+            case COUNTRY_ALL_REG:
+                table = COUNTRY_TABLE_NAME;
                 break;
         }
         int rows = sqlDB.delete(table, selection, selectionArgs);

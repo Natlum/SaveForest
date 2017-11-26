@@ -1,9 +1,19 @@
 package es.jjsr.saveforest.resource;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import es.jjsr.saveforest.R;
+import es.jjsr.saveforest.contentProviderPackage.CountryProvider;
 import es.jjsr.saveforest.dto.Country;
 import es.jjsr.saveforest.restful.CountryRest;
 
@@ -13,7 +23,12 @@ import es.jjsr.saveforest.restful.CountryRest;
 
 public class UpdateCountryTable {
 
-    public UpdateCountryTable() {
+    private ContentResolver solve;
+    private Activity activity;
+
+    public UpdateCountryTable(ContentResolver solve, Activity activity) {
+        this.solve = solve;
+        this.activity = activity;
         new DownloadTableData().execute();
     }
 
@@ -28,6 +43,39 @@ public class UpdateCountryTable {
         @Override
         protected void onPostExecute(ArrayList<Country> countries) {
             super.onPostExecute(countries);
+            int contentProviderCountryRows = new CountryProvider().allRowsCountries(solve);
+            if (contentProviderCountryRows != countries.size()){
+                if (contentProviderCountryRows != 0) {
+                    new CountryProvider().deleteAllRecord(solve);
+                }
+                for (Country c : countries){
+                    new CountryProvider().insertRecord(solve, c);
+                    Log.i("Update Country:", "Se está actualizando");
+                }
+                showMessage();
+            }
+        }
+
+        private void showMessage(){
+            LinearLayout layout = new LinearLayout(activity);
+            layout.setBackgroundResource(R.color.colorPrimaryLight);
+
+            TextView textView = new TextView(activity);
+            textView.setTextColor(Color.BLACK);
+            textView.setTextSize(15);
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+            textView.setText(R.string.country_table_updated);
+            textView.setPadding(15,15,15,15);
+
+            layout.addView(textView);
+
+            Toast toast = new Toast(activity);
+            toast.setView(layout);
+            toast.setGravity(Gravity.BOTTOM, 0, 50);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.show();
         }
     }
+
+
 }
