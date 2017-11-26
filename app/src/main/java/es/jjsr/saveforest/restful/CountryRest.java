@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import es.jjsr.saveforest.dto.Country;
 
 /**
+ * Clase que se encarga de Recibir el JSON desde el servicio web
  * Created by José Juan Sosa Rodríguez on 26/11/2017.
  */
 

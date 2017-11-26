@@ -1,6 +1,5 @@
 package es.jjsr.saveforest.contentProviderPackage;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,6 +8,8 @@ import android.net.Uri;
 import es.jjsr.saveforest.dto.Country;
 
 /**
+ * Proveedor de acceso a la tabla Country.
+ * Contiene lo necesario para hacer un CRUD
  * Created by José Juan Sosa Rodríguez on 26/11/2017.
  */
 

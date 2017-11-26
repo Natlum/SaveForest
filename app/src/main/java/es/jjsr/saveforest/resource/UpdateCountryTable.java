@@ -18,6 +18,7 @@ import es.jjsr.saveforest.dto.Country;
 import es.jjsr.saveforest.restful.CountryRest;
 
 /**
+ * Clase se que sencarga de decidir si actualiza la tabla de paises o no.
  * Created by José Juan Sosa Rodríguez on 26/11/2017.
  */
 
