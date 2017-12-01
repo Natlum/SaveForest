@@ -34,13 +34,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Date save to System.currentTimeMillis() or CURRENT_TIMESTAMP
 
         db.execSQL("CREATE TABLE "
-                + COUNTRY_TABLE_NAME
-                + "( " + Contract.Country.ID_COUNTRY + " INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
-                + Contract.Country.NAME_COUNTRY + " TEXT, "
-                + Contract.Country.CODE_COUNTRY + " TEXT ); "
-        );
-
-        db.execSQL("CREATE TABLE "
                     + ADVICE_TABLE_NAME
                     + "( " + Contract.Advice.ID_ADVICE + " INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
                     + Contract.Advice.NAME + " TEXT, "
@@ -50,8 +43,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     + Contract.Advice.PHONE_NUMBER + " INTEGER, "
                     + Contract.Advice.LATITUDE + " REAL, "
                     + Contract.Advice.LONGITUDE + " REAL, "
-                    + Contract.Advice.NAME_IMAGE + " TEXT, "
-                    + "FOREIGN KEY (" + Contract.Advice.ID_COUNTRY  + ") REFERENCES COUNTRY_TABLE_NAME(" + Contract.Country.ID_COUNTRY + "));"
+                    + Contract.Advice.NAME_IMAGE + " TEXT ); "
+        );
+
+        db.execSQL("CREATE TABLE "
+                + COUNTRY_TABLE_NAME
+                + "( " + Contract.Country.ID_COUNTRY + " INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
+                + Contract.Country.NAME_COUNTRY + " TEXT, "
+                + Contract.Country.CODE_COUNTRY + " TEXT ); "
         );
 
         db.execSQL("CREATE TABLE "
