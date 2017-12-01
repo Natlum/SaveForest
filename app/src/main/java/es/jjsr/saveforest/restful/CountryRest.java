@@ -21,7 +21,7 @@ import es.jjsr.saveforest.dto.Country;
  */
 
 public class CountryRest {
-    private final static String route_all_countries = "http://192.168.100.130:8080/WebASaveForest/webresources/countries/all-countries";
+    private final static String route_all_countries = "http://192.168.100.133:8080/WebASaveForest/webresources/countries/all-countries";
 
     public static ArrayList<Country> getAllCountries(){
         ArrayList<Country> countries = new ArrayList<>();

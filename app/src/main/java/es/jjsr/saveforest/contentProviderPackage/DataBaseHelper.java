@@ -16,6 +16,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String ADVICE_TABLE_NAME = "Advice";
     private static final String COUNTRY_TABLE_NAME = "Country";
+    private static final String BINNACLE_TABLE_NAME = "Binnacle";
 
     public DataBaseHelper(Context context, String DATABASE_NAME, int  DATABASE_VERSION) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,7 +54,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     + "FOREIGN KEY (" + Contract.Advice.ID_COUNTRY  + ") REFERENCES COUNTRY_TABLE_NAME(" + Contract.Country.ID_COUNTRY + "));"
         );
 
-        initializerData(db);
+        db.execSQL("CREATE TABLE "
+                + BINNACLE_TABLE_NAME
+                + "( " + Contract.Binnacle.ID + " INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
+                + Contract.Binnacle.ID_ADVICE + " INTEGER, "
+                + Contract.Binnacle.OPERATION + " INTEGER ); "
+        );
+
+        //initializerData(db);
     }
 
     private void initializerData(SQLiteDatabase db){
@@ -82,6 +90,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + ADVICE_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + COUNTRY_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + BINNACLE_TABLE_NAME);
 
         onCreate(db);
     }

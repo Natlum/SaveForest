@@ -39,4 +39,15 @@ public class Contract {
         public static final String NAME_COUNTRY = "nameCountry";
         public static final String CODE_COUNTRY = "codeCountry";
     }
+
+    public static final class Binnacle implements BaseColumns{
+
+        public static final Uri CONTENT_URI_BINNACLE = Uri.parse(
+                "content://" + AUTHORITY + "/Binnacle"
+        );
+
+        public static final String ID = "id";
+        public static final String ID_ADVICE = "idAdvice";
+        public static final String OPERATION = "operation";
+    }
 }

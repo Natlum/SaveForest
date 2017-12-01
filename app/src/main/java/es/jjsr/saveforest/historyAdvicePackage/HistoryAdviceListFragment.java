@@ -138,7 +138,7 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             switch (menuItem.getItemId()){
                 case R.id.menu_delete:
-                    AdviceProvider.deleteRecord(getActivity().getContentResolver(), idAdvice);
+                    AdviceProvider.deleteRecordWithBinnacle(getActivity().getContentResolver(), idAdvice);
                     break;
                 case R.id.menu_edit:
                     Intent intent = new Intent(getActivity(), UpdateAdviceActivity.class);

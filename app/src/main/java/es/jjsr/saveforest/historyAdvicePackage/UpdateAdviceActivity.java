@@ -64,7 +64,7 @@ public class UpdateAdviceActivity extends AppCompatActivity {
             return;
         }
         advice.setDescription(newDescription);
-        AdviceProvider.updateRecord(getContentResolver(), advice);
+        AdviceProvider.updateRecordWithBinnacle(getContentResolver(), advice);
         finish();
     }
 

@@ -27,13 +27,17 @@ public class MyContentProvider extends ContentProvider {
     private static final int COUNTRY_ONE_REG = 3; // content://es.jjsr.saveforest.contentProviderPackage.MyContentProvider/Country/#
     private static final int COUNTRY_ALL_REG = 4; // content://es.jjsr.saveforest.contentProviderPackage.MyContentProvider/Country
 
+    private static final int BINNACLE_ONE_REG = 5; // content://es.jjsr.saveforest.contentProviderPackage.MyContentProvider/Binnacle/#
+    private static final int BINNACLE_ALL_REG = 6; // content://es.jjsr.saveforest.contentProviderPackage.MyContentProvider/Binnacle
+
     private SQLiteDatabase sqlDB;
     public DataBaseHelper dbHelper;
     private static final String DATABASE_NAME = "SaveForest.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private static final String ADVICE_TABLE_NAME = "Advice";
     private static final String COUNTRY_TABLE_NAME = "Country";
+    private static final String BINNACLE_TABLE_NAME = "Binnacle";
 
     //Indicates an invalid content URI
     public static final int INVALID_URI = -1;
@@ -70,6 +74,14 @@ public class MyContentProvider extends ContentProvider {
                 Contract.AUTHORITY,
                 COUNTRY_TABLE_NAME + "/#",
                 COUNTRY_ONE_REG);
+        sUriMatcher.addURI(
+                Contract.AUTHORITY,
+                BINNACLE_TABLE_NAME,
+                BINNACLE_ALL_REG);
+        sUriMatcher.addURI(
+                Contract.AUTHORITY,
+                BINNACLE_TABLE_NAME + "/#",
+                BINNACLE_ONE_REG);
 
         sMimeTypes.put(
                 ADVICE_ALL_REG,
@@ -87,6 +99,14 @@ public class MyContentProvider extends ContentProvider {
                 COUNTRY_ONE_REG,
                 "vnd.android.cursor.item/vnd." +
                         Contract.AUTHORITY + "." + COUNTRY_TABLE_NAME);
+        sMimeTypes.put(
+                BINNACLE_ALL_REG,
+                "vnd.android.cursor.dir/vnd." +
+                        Contract.AUTHORITY + "." + BINNACLE_TABLE_NAME);
+        sMimeTypes.put(
+                BINNACLE_ONE_REG,
+                "vnd.android.cursor.item/vnd." +
+                        Contract.AUTHORITY + "." + BINNACLE_TABLE_NAME);
     }
 
     public MyContentProvider() {
@@ -128,11 +148,21 @@ public class MyContentProvider extends ContentProvider {
                 if (TextUtils.isEmpty(sortOrder)) sortOrder = Contract.Country.ID_COUNTRY + " ASC";
                 qb.setTables(COUNTRY_TABLE_NAME);
                 break;
+            case BINNACLE_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contract.Binnacle.ID + " = "
+                        + uri.getLastPathSegment();
+                qb.setTables(BINNACLE_TABLE_NAME);
+                break;
+            case BINNACLE_ALL_REG:
+                if (TextUtils.isEmpty(sortOrder)) sortOrder = Contract.Binnacle.ID + " ASC";
+                qb.setTables(BINNACLE_TABLE_NAME);
+                break;
         }
 
         Cursor c;
         c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
-        c.setNotificationUri(getContext().getContentResolver(), uri);
+        //c.setNotificationUri(getContext().getContentResolver(), uri);
         return c;
     }
 
@@ -151,8 +181,12 @@ public class MyContentProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)){
             case ADVICE_ALL_REG:
                 table = ADVICE_TABLE_NAME;
+                break;
             case COUNTRY_ALL_REG:
                 table = COUNTRY_TABLE_NAME;
+                break;
+            case BINNACLE_ALL_REG:
+                table = BINNACLE_TABLE_NAME;
                 break;
         }
 
@@ -184,6 +218,15 @@ public class MyContentProvider extends ContentProvider {
             case COUNTRY_ALL_REG:
                 table = COUNTRY_TABLE_NAME;
                 break;
+            case BINNACLE_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contract.Binnacle.ID + " = "
+                        + uri.getLastPathSegment();
+                table = BINNACLE_TABLE_NAME;
+                break;
+            case BINNACLE_ALL_REG:
+                table = BINNACLE_TABLE_NAME;
+                break;
         }
         int rows = sqlDB.delete(table, selection, selectionArgs);
         if (rows > 0){
@@ -207,6 +250,12 @@ public class MyContentProvider extends ContentProvider {
                 break;
             case ADVICE_ALL_REG:
                 table = ADVICE_TABLE_NAME;
+                break;
+            case BINNACLE_ONE_REG:
+                if (null == selection) selection = "";
+                selection += Contract.Binnacle.ID + " = "
+                        +uri.getLastPathSegment();
+                table = BINNACLE_TABLE_NAME;
                 break;
         }
 
