@@ -6,6 +6,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 import es.jjsr.saveforest.dto.Binnacle;
 
 /**
@@ -59,6 +61,31 @@ public class BinnacleProvider {
         }else {
             return null;
         }
+    }
+
+    public static ArrayList<Binnacle> readAllRecord(ContentResolver solve){
+        Uri uri = Contract.Binnacle.CONTENT_URI_BINNACLE;
+
+        String[] projection = {
+                Contract.Binnacle.ID,
+                Contract.Binnacle.ID_ADVICE,
+                Contract.Binnacle.OPERATION
+        };
+
+        Cursor cursor = solve.query(uri, projection, null, null, null);
+
+        ArrayList<Binnacle> binnacles = new ArrayList<>();
+        Binnacle binnacle;
+
+        while(cursor.moveToNext()){
+            binnacle = new Binnacle();
+            binnacle.setId(cursor.getInt(cursor.getColumnIndex(Contract.Binnacle.ID)));
+            binnacle.setId_advice(cursor.getInt(cursor.getColumnIndex(Contract.Binnacle.ID_ADVICE)));
+            binnacle.setOperation(cursor.getInt(cursor.getColumnIndex(Contract.Binnacle.OPERATION)));
+            binnacles.add(binnacle);
+        }
+
+        return binnacles;
     }
 
 }
