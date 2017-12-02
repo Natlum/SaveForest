@@ -6,10 +6,17 @@ import android.app.Application;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 
 import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.sync.Synchronization;
+import es.jjsr.saveforest.volley.utils.LruBitmapCache;
 
 /**
  * Created by José Juan Sosa Rodríguez on 16/11/2017.
@@ -30,7 +37,7 @@ public class AppController extends Application{
     //An account type, in the form of a domain name
     public static final String ACCOUNT_TYPE = "es.jjsr.saveforest";
     //The account name
-    public static final String ACCOUNT = "SaveForest";
+    public static final String ACCOUNT = "Save Forest";
     //Sync interval constants
     public static final long SYNC_INTERVAL = GConstants.SYNC_INTERVAL;
 
@@ -72,16 +79,16 @@ public class AppController extends Application{
         return this.mImageLoader;
     }
 
-    public <T> void addToRequestQueue(Request<T> reg){
-        reg.setTag(TAG);
+    public <T> void addToRequestQueue(Request<T> reg, String tag){
+        reg.setTag(TextUtils . isEmpty(tag) ? TAG : tag);
         getRequestQueue().add(reg);
     }
 
-    public void cancelPendingRequests(Object tag){
+    /*public void cancelPendingRequests(Object tag){
         if (mRequestQueue != null){
             mRequestQueue.cancellAll(tag);
         }
-    }
+    }*/
 
     public static Account CreateSyncAccount(Context context){
         //Create the account type and default account

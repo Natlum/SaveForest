@@ -19,7 +19,7 @@ public class SyncAdapter  extends AbstractThreadedSyncAdapter{
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
 
-        AdviceGlobal.getInstance().setSynchronization(new Synchronization(context));
+        AdviceGlobal.getmInstance().setSynchronization(new Synchronization(context));
     }
 
     public SyncAdapter(
@@ -28,12 +28,12 @@ public class SyncAdapter  extends AbstractThreadedSyncAdapter{
             boolean allowParallelSyncs){
         super(context, autoInitialize, allowParallelSyncs);
 
-        AdviceGlobal.getInstance().setSynchronization(new Synchronization(context));
+        AdviceGlobal.getmInstance().setSynchronization(new Synchronization(context));
     }
 
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s,
                               ContentProviderClient contentProviderClient, SyncResult syncResult) {
-        AdviceGlobal.getInstance().getSynchronization().syncUp();
+        AdviceGlobal.getmInstance().getSynchronization().syncUp();
     }
 }

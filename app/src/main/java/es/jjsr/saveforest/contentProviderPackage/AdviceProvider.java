@@ -6,7 +6,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
@@ -52,6 +55,28 @@ public class AdviceProvider {
         binnacle.setOperation(GConstants.OPERATION_INSERT);
 
         BinnacleProvider.insertRecord(solve, binnacle);
+    }
+
+    public static Uri insertRecordFromServer(ContentResolver solve, Advice advice){
+        Uri uri = Contract.Advice.CONTENT_URI_ADVICE;
+
+        ContentValues values = new ContentValues();
+
+        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+        String dateString = originalFormat.format(advice.getDate());
+        Integer date = Integer.valueOf(dateString);
+
+        values.put(Contract.Advice.NAME, advice.getName());
+        values.put(Contract.Advice.DATE, date);
+        values.put(Contract.Advice.DESCRIPTION, advice.getDescription());
+        values.put(Contract.Advice.ID_COUNTRY, advice.getIdCountry());
+        values.put(Contract.Advice.LATITUDE, advice.getLatitude());
+        values.put(Contract.Advice.LONGITUDE, advice.getLongitude());
+        values.put(Contract.Advice.NAME_IMAGE, advice.getNameImage());
+        values.put(Contract.Advice.PHONE_NUMBER, advice.getPhoneNumber());
+        values.put(Contract.Advice.ID_ADVICE, advice.getId());
+
+        return solve.insert(uri, values);
     }
 
     public static void deleteRecord(ContentResolver solve, int idAdvice){
@@ -105,5 +130,47 @@ public class AdviceProvider {
         }else {
             return null;
         }
+    }
+
+    public static ArrayList<Advice> readAllRecord(ContentResolver solve) throws ParseException {
+        Uri uri = Contract.Advice.CONTENT_URI_ADVICE;
+
+        String[] projection = {
+                Contract.Advice.ID_ADVICE,
+                Contract.Advice.DESCRIPTION,
+                Contract.Advice.ID_COUNTRY,
+                Contract.Advice.NAME,
+                Contract.Advice.NAME_IMAGE,
+                Contract.Advice.PHONE_NUMBER,
+                Contract.Advice.DATE,
+                Contract.Advice.LONGITUDE,
+                Contract.Advice.LATITUDE
+        };
+
+        Cursor cursor = solve.query(uri, projection, null, null, null);
+
+        ArrayList<Advice> advices = new ArrayList<>();
+        Advice advice;
+
+        while(cursor.moveToNext()){
+            advice = new Advice();
+            advice.setId(cursor.getInt(cursor.getColumnIndex(Contract.Advice.ID_ADVICE)));
+            advice.setDescription(cursor.getString(cursor.getColumnIndex(Contract.Advice.DESCRIPTION)));
+            advice.setIdCountry(cursor.getInt(cursor.getColumnIndex(Contract.Advice.ID_COUNTRY)));
+            advice.setName(cursor.getString(cursor.getColumnIndex(Contract.Advice.NAME)));
+            advice.setNameImage(cursor.getString(cursor.getColumnIndex(Contract.Advice.NAME_IMAGE)));
+            advice.setPhoneNumber(cursor.getInt(cursor.getColumnIndex(Contract.Advice.PHONE_NUMBER)));
+
+            Integer value = cursor.getInt(cursor.getColumnIndex(Contract.Advice.DATE));
+            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+            Date date = originalFormat.parse(value.toString());
+
+            advice.setDate(date);
+            advice.setLongitude(cursor.getDouble(cursor.getColumnIndex(Contract.Advice.LONGITUDE)));
+            advice.setLatitude(cursor.getDouble(cursor.getColumnIndex(Contract.Advice.LATITUDE)));
+            advices.add(advice);
+        }
+
+        return advices;
     }
 }
