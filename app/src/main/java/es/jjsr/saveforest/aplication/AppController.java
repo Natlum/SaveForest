@@ -80,15 +80,15 @@ public class AppController extends Application{
     }
 
     public <T> void addToRequestQueue(Request<T> reg, String tag){
-        reg.setTag(TextUtils . isEmpty(tag) ? TAG : tag);
+        reg.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         getRequestQueue().add(reg);
     }
 
-    /*public void cancelPendingRequests(Object tag){
+    public void cancelPendingRequests(Object tag){
         if (mRequestQueue != null){
-            mRequestQueue.cancellAll(tag);
+            mRequestQueue.cancelAll(tag);
         }
-    }*/
+    }
 
     public static Account CreateSyncAccount(Context context){
         //Create the account type and default account

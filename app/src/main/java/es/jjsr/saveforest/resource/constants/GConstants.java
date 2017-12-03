@@ -14,6 +14,6 @@ public class GConstants {
     public static final int SIN_VALOR_INT = -1;
     public static final long SYNC_INTERVAL = 60; //Segundos para casa sincronización
     public static final boolean VERSION_ADMINISTRATOR = true;
-    public static final String SERVER_ROUTE = "http://192.168.100.133:8080/WebASaveForest/webresources";
-    public static final String ADVICES_SERVER_ROUTE = "http://192.168.100.133:8080/WebASaveForest/webresources/advices";
+    public static final String SERVER_ROUTE = "http://jjsr.es:8080/WebASaveForest/webresources";
+    public static final String ADVICES_SERVER_ROUTE = "http://jjsr.es:8080/WebASaveForest/webresources/advices";
 }
