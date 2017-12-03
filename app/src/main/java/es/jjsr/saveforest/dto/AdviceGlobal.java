@@ -1,10 +1,8 @@
 package es.jjsr.saveforest.dto;
 
-import android.app.Application;
-
 import java.util.Date;
 
-import es.jjsr.saveforest.resource.ApplicationGlobal;
+import es.jjsr.saveforest.aplication.AppController;
 
 /**
  * Esta es la class que se usará de manera global en la aplicación,
@@ -12,7 +10,7 @@ import es.jjsr.saveforest.resource.ApplicationGlobal;
  * Created by José Juan Sosa Rodríguez on 22/10/2017.
  */
 
-public class AdviceGlobal extends ApplicationGlobal{
+public class AdviceGlobal extends AppController {
 
     private String name;
     private String description;
