@@ -18,7 +18,7 @@ import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.Binnacle;
 import es.jjsr.saveforest.resource.constants.GConstants;
-import es.jjsr.saveforest.volley.utils.AdviceVolley;
+import es.jjsr.saveforest.volley.AdviceVolley;
 
 /**
  * Created by José Juan Sosa Rodríguez on 02/12/2017.

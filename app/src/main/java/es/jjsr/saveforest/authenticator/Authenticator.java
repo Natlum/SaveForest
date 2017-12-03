@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 /**
- * Implementa {@link AbstractAccountAuthenticator} con todos sus métodos están casi por defecto
+ * Implementa AbstractAccountAuthenticator con todos sus métodos están casi por defecto
  * Created by José Juan Sosa Rodríguez on 01/12/2017.
  */
 
