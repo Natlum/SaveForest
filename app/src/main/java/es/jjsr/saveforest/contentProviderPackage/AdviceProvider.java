@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
@@ -52,6 +53,11 @@ public class AdviceProvider {
         binnacle.setOperation(GConstants.OPERATION_INSERT);
 
         BinnacleProvider.insertRecord(solve, binnacle);
+
+        /*Uri newUri1 = BinnacleProvider.insertRecord(solve, binnacle);
+        Binnacle newBinnacle = BinnacleProvider.readRecord(solve, Integer.parseInt(newUri1.getLastPathSegment()));
+        Toast.makeText(activity, "Id del aviso: " + newBinnacle.getId_advice() + "\n Operación: " +
+        newBinnacle.getOperation(), Toast.LENGTH_LONG).show();*/
     }
 
     public static void deleteRecord(ContentResolver solve, int idAdvice){

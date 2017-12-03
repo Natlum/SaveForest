@@ -16,14 +16,14 @@ import es.jjsr.saveforest.dto.Binnacle;
 
 public class BinnacleProvider {
 
-    public static void insertRecord(ContentResolver solve, Binnacle binnacle){
+    public static Uri insertRecord(ContentResolver solve, Binnacle binnacle){
         Uri uri = Contract.Binnacle.CONTENT_URI_BINNACLE;
 
         ContentValues values = new ContentValues();
         values.put(Contract.Binnacle.ID_ADVICE, binnacle.getId_advice());
         values.put(Contract.Binnacle.OPERATION, binnacle.getOperation());
 
-        solve.insert(uri, values);
+        return solve.insert(uri, values);
     }
 
     public static void deleteRecord(ContentResolver solve, int idBinnacle){
