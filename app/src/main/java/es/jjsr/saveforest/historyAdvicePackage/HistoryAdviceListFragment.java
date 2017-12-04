@@ -34,6 +34,7 @@ import es.jjsr.saveforest.adapter.AdapterForRecyclerView;
 import es.jjsr.saveforest.contentProviderPackage.AdviceProvider;
 import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.dto.Advice;
+import es.jjsr.saveforest.resource.constants.GConstants;
 
 /**
  * Contiene lo necesario para mostrar el listado de avisos.
@@ -96,19 +97,21 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
                     startActivity(intent);
                 }
             });
-            mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    if (mActionMode != null) {
-                        return false;
+            if (GConstants.VERSION_ADMINISTRATOR){
+                mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        if (mActionMode != null) {
+                            return false;
+                        }
+                        mActionMode = getActivity().startActionMode(mActionModeCallback);
+                        view.setSelected(true);
+                        idAdvice = advices.get(mRecyclerView.getChildAdapterPosition(view)).getId();
+                        cardSelected = mRecyclerView.getChildAdapterPosition(view);
+                        return true;
                     }
-                    mActionMode = getActivity().startActionMode(mActionModeCallback);
-                    view.setSelected(true);
-                    idAdvice = advices.get(mRecyclerView.getChildAdapterPosition(view)).getId();
-                    cardSelected = mRecyclerView.getChildAdapterPosition(view);
-                    return true;
-                }
-            });
+                });
+            }
             mRecyclerView.setAdapter(mAdapter);
         }
     }
