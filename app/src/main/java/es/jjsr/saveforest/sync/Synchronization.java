@@ -51,6 +51,8 @@ public class Synchronization {
         }
 
         if (GConstants.VERSION_ADMINISTRATOR){
+            //getUpdatesFromServer();
+            Log.i(LOGTAG, "Esntra a sincronizar");
             sendUpdatesToServer();
         }else{
             getUpdatesFromServer();
@@ -66,7 +68,7 @@ public class Synchronization {
                 case GConstants.OPERATION_INSERT:
                     Advice advice = null;
                     try {
-                        advice = AdviceProvider.readRecord(resolver, binnacle.getId_advice());
+                        advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
                         AdviceVolley.addAdvice(advice, true, binnacle.getId());
                     }catch (Exception e){
                         e.printStackTrace();
@@ -74,7 +76,7 @@ public class Synchronization {
                     break;
                 case GConstants.OPERATION_UPDATE:
                     try {
-                        advice = AdviceProvider.readRecord(resolver, binnacle.getId_advice());
+                        advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
                         AdviceVolley.updateAdvice(advice, true, binnacle.getId());
                     }catch (Exception e){
                         e.printStackTrace();

@@ -132,6 +132,33 @@ public class AdviceProvider {
         }
     }
 
+    public static Advice readFullRecord(ContentResolver solve, int idAdvice){
+        Uri uri = Uri.parse(Contract.Advice.CONTENT_URI_ADVICE +"/" + idAdvice);
+
+        String[] projection = {
+                Contract.Advice.ID_ADVICE,
+                Contract.Advice.DESCRIPTION,
+                Contract.Advice.ID_COUNTRY,
+                Contract.Advice.NAME,
+                Contract.Advice.NAME_IMAGE,
+                Contract.Advice.PHONE_NUMBER,
+                Contract.Advice.DATE,
+                Contract.Advice.LONGITUDE,
+                Contract.Advice.LATITUDE
+        };
+
+        Cursor cursor = solve.query(uri, projection, null, null, null);
+
+        if (cursor.moveToFirst()){
+            Advice advice = new Advice();
+            advice.setId(idAdvice);
+            advice.setDescription(cursor.getString(cursor.getColumnIndex(Contract.Advice.DESCRIPTION)));
+            return advice;
+        }else {
+            return null;
+        }
+    }
+
     public static ArrayList<Advice> readAllRecord(ContentResolver solve) throws ParseException {
         Uri uri = Contract.Advice.CONTENT_URI_ADVICE;
 
