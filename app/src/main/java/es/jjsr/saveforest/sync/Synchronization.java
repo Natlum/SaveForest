@@ -49,11 +49,21 @@ public class Synchronization {
         if (isWaitingForServerResponse()){
             return true;
         }
+        ArrayList<Advice> advices;
+        try {
+            advices = AdviceProvider.readAllRecord(resolver);
+        } catch (ParseException e) {
+            Log.e(LOGTAG, "Error al leer el ContentProvider " + e.getMessage());
+            return true;
+        }
 
         if (GConstants.VERSION_ADMINISTRATOR){
-            //getUpdatesFromServer();
             Log.i(LOGTAG, "Esntra a sincronizar");
-            sendUpdatesToServer();
+            if (advices.size() <= 0){
+                getUpdatesFromServer();
+            }else {
+                sendUpdatesToServer();
+            }
         }else{
             getUpdatesFromServer();
         }
@@ -87,6 +97,7 @@ public class Synchronization {
                     break;
             }
         }
+        //getUpdatesFromServer();
     }
 
     private void getUpdatesFromServer() {
