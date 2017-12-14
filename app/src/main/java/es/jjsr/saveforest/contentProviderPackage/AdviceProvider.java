@@ -132,7 +132,7 @@ public class AdviceProvider {
         }
     }
 
-    public static Advice readFullRecord(ContentResolver solve, int idAdvice){
+    public static Advice readFullRecord(ContentResolver solve, int idAdvice) throws ParseException {
         Uri uri = Uri.parse(Contract.Advice.CONTENT_URI_ADVICE +"/" + idAdvice);
 
         String[] projection = {
@@ -153,6 +153,16 @@ public class AdviceProvider {
             Advice advice = new Advice();
             advice.setId(idAdvice);
             advice.setDescription(cursor.getString(cursor.getColumnIndex(Contract.Advice.DESCRIPTION)));
+            advice.setIdCountry(cursor.getInt(cursor.getColumnIndex(Contract.Advice.ID_COUNTRY)));
+            advice.setName(cursor.getString(cursor.getColumnIndex(Contract.Advice.NAME)));
+            advice.setNameImage(cursor.getString(cursor.getColumnIndex(Contract.Advice.NAME_IMAGE)));
+            advice.setPhoneNumber(cursor.getInt(cursor.getColumnIndex(Contract.Advice.PHONE_NUMBER)));
+            advice.setLongitude(cursor.getDouble(cursor.getColumnIndex(Contract.Advice.LONGITUDE)));
+            advice.setLatitude(cursor.getDouble(cursor.getColumnIndex(Contract.Advice.LATITUDE)));
+            Integer dateInt = cursor.getInt(cursor.getColumnIndex(Contract.Advice.DATE));
+            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+            Date date = originalFormat.parse(dateInt.toString());
+            advice.setDate(date);
             return advice;
         }else {
             return null;

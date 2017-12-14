@@ -1,5 +1,7 @@
 package es.jjsr.saveforest.volley;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -58,6 +60,7 @@ public class AdviceVolley {
         String url = GConstants.ADVICES_SERVER_ROUTE + "/insert-advices";
 
         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
+        Log.i("Tibu", "Fecha" + advice.getDate().toString());
         String dateString = originalFormat.format(advice.getDate());
         Integer date = Integer.valueOf(dateString);
 
@@ -82,6 +85,7 @@ public class AdviceVolley {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.i("Tibu", "Se insertó");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
@@ -91,6 +95,7 @@ public class AdviceVolley {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.i("Tibu", "No se insertó");
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                     }
                 });

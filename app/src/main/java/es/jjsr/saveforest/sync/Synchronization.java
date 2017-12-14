@@ -79,6 +79,7 @@ public class Synchronization {
                     Advice advice = null;
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
+                        Log.i("Tibu", advice.toString());
                         AdviceVolley.addAdvice(advice, true, binnacle.getId());
                     }catch (Exception e){
                         e.printStackTrace();
@@ -97,7 +98,7 @@ public class Synchronization {
                     break;
             }
         }
-        //getUpdatesFromServer();
+        getUpdatesFromServer();
     }
 
     private void getUpdatesFromServer() {

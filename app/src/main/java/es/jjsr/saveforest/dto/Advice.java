@@ -118,4 +118,9 @@ public class Advice implements Serializable{
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
+
+    @Override
+    public String toString() {
+        return "Advice: " + id + "," + name + "," + idCountry + "," + description + "," + latitude + "," + longitude + "," + nameImage + "," + phoneNumber;
+    }
 }
