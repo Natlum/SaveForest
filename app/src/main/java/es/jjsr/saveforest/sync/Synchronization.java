@@ -53,34 +53,40 @@ public class Synchronization {
         try {
             advices = AdviceProvider.readAllRecord(resolver);
         } catch (ParseException e) {
-            Log.e(LOGTAG, "Error al leer el ContentProvider " + e.getMessage());
+            Log.e(LOGTAG, "Fail to read ContentProvider " + e.getMessage());
             return true;
         }
 
         if (GConstants.VERSION_ADMINISTRATOR){
-            Log.i(LOGTAG, "Esntra a sincronizar");
+            Log.i(LOGTAG, "Go admin Sync");
             if (advices.size() <= 0){
                 getUpdatesFromServer();
             }else {
                 sendUpdatesToServer();
             }
         }else{
+            Log.i(LOGTAG, "Go user Sync");
             getUpdatesFromServer();
         }
-
         return true;
     }
 
     private void sendUpdatesToServer() {
         ArrayList<Binnacle> regBinnacle = BinnacleProvider.readAllRecord(resolver);
+        Boolean value = false;
         for (Binnacle binnacle : regBinnacle){
             switch (binnacle.getOperation()){
                 case GConstants.OPERATION_INSERT:
                     Advice advice = null;
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
-                        Log.i("Tibu", advice.toString());
-                        AdviceVolley.addAdvice(advice, true, binnacle.getId());
+                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
+                            value = true;
+                        }else {
+                            //FaltaAAAAAAAAAAA
+                            //Aumentar el id del registro en el content provider y en el bitácoras.
+                        }
+
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -88,17 +94,23 @@ public class Synchronization {
                 case GConstants.OPERATION_UPDATE:
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
-                        AdviceVolley.updateAdvice(advice, true, binnacle.getId());
+                        value = AdviceVolley.updateAdvice(advice, true, binnacle.getId());
                     }catch (Exception e){
                         e.printStackTrace();
                     }
                     break;
                 case GConstants.OPERATION_DELETE:
-                    AdviceVolley.deleteAdvice(binnacle.getId_advice(), true, binnacle.getId());
+                    try {
+                        value = AdviceVolley.deleteAdvice(binnacle.getId_advice(), true, binnacle.getId());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     break;
             }
         }
-        getUpdatesFromServer();
+        if (value){
+            getUpdatesFromServer();
+        }
     }
 
     private void getUpdatesFromServer() {

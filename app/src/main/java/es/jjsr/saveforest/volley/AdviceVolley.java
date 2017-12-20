@@ -27,6 +27,7 @@ import es.jjsr.saveforest.sync.Synchronization;
  */
 
 public class AdviceVolley {
+    final static String TAG = "JJSR response webapp";
     final static String route = GConstants.ADVICES_SERVER_ROUTE + "/all-advices";
 
     public static void getAllAdvices(){
@@ -41,6 +42,7 @@ public class AdviceVolley {
                     @Override
                     public void onResponse(JSONArray response) {
                         //Display response RESPUESTA CORRECTA
+                        Log.i(TAG, "Display response");
                         Synchronization.doUpdatesFromServerOnceGot(response);
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                     }
@@ -49,18 +51,19 @@ public class AdviceVolley {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //Error response
+                        Log.i(TAG, "Error response");
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                     }
                 });
         AdviceGlobal.getmInstance().addToRequestQueue(getRequest, tag_json_obj);
     }
 
-    public static void addAdvice(Advice advice, final boolean withBinnacle, final int idBinnacle){
+    public static Boolean addAdvice(Advice advice, final boolean withBinnacle, final int idBinnacle){
+        final Boolean[] value = {false};
         String tag_json_obj = "addAdvice";
         String url = GConstants.ADVICES_SERVER_ROUTE + "/insert-advices";
 
         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
-        Log.i("Tibu", "Fecha" + advice.getDate().toString());
         String dateString = originalFormat.format(advice.getDate());
         Integer date = Integer.valueOf(dateString);
 
@@ -77,6 +80,7 @@ public class AdviceVolley {
             jsonObject.put("phoneNumber", advice.getPhoneNumber());
         } catch (JSONException e) {
             e.printStackTrace();
+            return value[0];
         }
 
         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(true);
@@ -85,24 +89,28 @@ public class AdviceVolley {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("Tibu", "Se insertó");
+                        Log.i(TAG, "It has been inserted correctly");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        value[0] = true;
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("Tibu", "No se insertó");
+                        Log.i(TAG, "It has not been inserted");
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        value[0] = false;
                     }
                 });
         AdviceGlobal.getmInstance().addToRequestQueue(postRequest, tag_json_obj);
+        return value[0];
     }
 
-    public static void updateAdvice(Advice advice, final boolean withBinnacle, final int idBinnacle){
+    public static Boolean updateAdvice(Advice advice, final boolean withBinnacle, final int idBinnacle){
+        final Boolean[] value = {false};
         String tag_json_obj = "updateAdvice";
         String url = GConstants.ADVICES_SERVER_ROUTE + "/" + advice.getId();
 
@@ -123,6 +131,7 @@ public class AdviceVolley {
             jsonObject.put("phoneNumber", advice.getPhoneNumber());
         } catch (JSONException e) {
             e.printStackTrace();
+            return value[0];
         }
 
         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(true);
@@ -131,22 +140,28 @@ public class AdviceVolley {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.i(TAG, "It has been updated correctly");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        value[0] = true;
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.i(TAG, "It has not been updated");
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        value[0] = false;
                     }
                 });
         AdviceGlobal.getmInstance().addToRequestQueue(putRequest, tag_json_obj);
+        return value[0];
     }
 
-    public static void deleteAdvice(int id, final boolean withBinnacle, final int idBinnacle){
+    public static Boolean deleteAdvice(int id, final boolean withBinnacle, final int idBinnacle){
+        final Boolean[] value = {false};
         String tag_json_obj = "deleteAdvice";
         String url = GConstants.ADVICES_SERVER_ROUTE + "/" + String.valueOf(id);
 
@@ -156,18 +171,23 @@ public class AdviceVolley {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.i(TAG, "It has been deleted correctly");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        value[0] = true;
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.i(TAG, "It has not been deleted");
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        value[0] = false;
                     }
                 });
         AdviceGlobal.getmInstance().addToRequestQueue(delRequest, tag_json_obj);
+        return value[0];
     }
 }
