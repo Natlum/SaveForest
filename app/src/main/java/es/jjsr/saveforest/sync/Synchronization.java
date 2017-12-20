@@ -66,14 +66,18 @@ public class Synchronization {
             }
         }else{
             Log.i(LOGTAG, "Go user Sync");
-            getUpdatesFromServer();
+            if (advices.size() <= 0){
+                getUpdatesFromServer();
+            }else {
+                sendUpdatesToServer();
+            }
         }
         return true;
     }
 
     private void sendUpdatesToServer() {
         ArrayList<Binnacle> regBinnacle = BinnacleProvider.readAllRecord(resolver);
-        Boolean value = false;
+        Boolean value = true;
         for (Binnacle binnacle : regBinnacle){
             switch (binnacle.getOperation()){
                 case GConstants.OPERATION_INSERT:
@@ -83,6 +87,7 @@ public class Synchronization {
                         if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
                             value = true;
                         }else {
+                            value = false;
                             //FaltaAAAAAAAAAAA
                             //Aumentar el id del registro en el content provider y en el bitácoras.
                         }
@@ -118,7 +123,7 @@ public class Synchronization {
     }
 
     public static void doUpdatesFromServerOnceGot(JSONArray jsonArray){
-        Log.i(LOGTAG, "Recibir actualizaciones del servidor");
+        Log.i(LOGTAG, "Receive server updates");
 
         try {
             ArrayList<Integer> updateRecordIdentifiers = new ArrayList<Integer>();
