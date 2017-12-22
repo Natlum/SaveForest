@@ -87,6 +87,15 @@ public class Synchronization {
                     Advice advice = null;
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
+
+                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
+                            value = true;
+                        }else {
+                            value = false;
+                            //FaltaAAAAAAAAAAA
+                            //Aumentar el id del registro en el content provider y en el bitácoras.
+                        }
+
                         if (advice.getNameImage() != null){
                             Log.i(LOGTAG, advice.getNameImage());
                             try {
@@ -97,28 +106,7 @@ public class Synchronization {
                                 e.printStackTrace();
                                 Log.i(LOGTAG, "Fail upload image to server");
                             }
-
                         }
-                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
-                            value = true;
-                            if (advice.getNameImage() != null){
-                                Log.i(LOGTAG, "NameImage != null");
-                                try {
-                                    Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
-                                    new UploadImageAsyncTask(context, bitmap, advice.getNameImage());
-                                    Log.i(LOGTAG, "Image Uploader");
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                    Log.i(LOGTAG, "Fail upload image to server");
-                                }
-
-                            }
-                        }else {
-                            value = false;
-                            //FaltaAAAAAAAAAAA
-                            //Aumentar el id del registro en el content provider y en el bitácoras.
-                        }
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
