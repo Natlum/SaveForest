@@ -44,6 +44,10 @@ public class UpdateCountryTable {
         @Override
         protected void onPostExecute(ArrayList<Country> countries) {
             super.onPostExecute(countries);
+            if (countries == null){
+                Log.i("Update Country:", "Error al descargar los datos del servidor");
+                return;
+            }
             int contentProviderCountryRows = new CountryProvider().allRowsCountries(solve);
             if (contentProviderCountryRows != countries.size()){
                 if (contentProviderCountryRows != 0) {
