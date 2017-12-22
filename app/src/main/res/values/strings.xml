@@ -111,5 +111,7 @@
     <string name="fail_save_manual">Error al guardar el documento</string>
     <string name="country_table_updated">Se ha actualizado la tabla paises.</string>
 
+    <string name="fail_upload_image">Error al subir la imagen:</string>
+
 
 </resources>

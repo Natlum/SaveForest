@@ -2,6 +2,7 @@ package es.jjsr.saveforest.sync;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -17,6 +18,8 @@ import es.jjsr.saveforest.contentProviderPackage.AdviceProvider;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.Binnacle;
+import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.UploadImageAsyncTask;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.volley.AdviceVolley;
 
@@ -84,8 +87,32 @@ public class Synchronization {
                     Advice advice = null;
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
+                        if (advice.getNameImage() != null){
+                            Log.i(LOGTAG, advice.getNameImage());
+                            try {
+                                Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
+                                new UploadImageAsyncTask(context, bitmap, advice.getNameImage());
+                                Log.i(LOGTAG, "Image Uploader");
+                            }catch (Exception e){
+                                e.printStackTrace();
+                                Log.i(LOGTAG, "Fail upload image to server");
+                            }
+
+                        }
                         if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
                             value = true;
+                            if (advice.getNameImage() != null){
+                                Log.i(LOGTAG, "NameImage != null");
+                                try {
+                                    Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
+                                    new UploadImageAsyncTask(context, bitmap, advice.getNameImage());
+                                    Log.i(LOGTAG, "Image Uploader");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                    Log.i(LOGTAG, "Fail upload image to server");
+                                }
+
+                            }
                         }else {
                             value = false;
                             //FaltaAAAAAAAAAAA

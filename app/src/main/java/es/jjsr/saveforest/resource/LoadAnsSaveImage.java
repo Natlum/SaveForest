@@ -50,4 +50,11 @@ public class LoadAnsSaveImage {
         outputStream.close();
     }
 
+    public static Bitmap loadImageFromStorageToSaveOnServer(Context ctx, String fileName) throws FileNotFoundException {
+        //File file = ctx.getFileStreamPath(fileName);
+        File file = new File(ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName);
+        Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+        return bitmap;
+    }
+
 }
