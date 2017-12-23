@@ -4,10 +4,10 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.JsonArrayRequest;
+import com.android.volley.request.JsonObjectRequest;
+import com.android.volley.request.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +15,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 
-import es.jjsr.saveforest.aplication.AppController;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
@@ -45,6 +44,7 @@ public class AdviceVolley {
                         Log.i(TAG, "Display response");
                         Synchronization.doUpdatesFromServerOnceGot(response);
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        Log.i(TAG, response.toString());
                     }
                 },
                 new Response.ErrorListener() {
