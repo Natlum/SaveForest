@@ -45,6 +45,7 @@ public class AdviceVolley {
                         Log.i(TAG, "Display response");
                         Synchronization.doUpdatesFromServerOnceGot(response);
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        Log.i("RESPONSE_SERVER", response.toString());
                     }
                 },
                 new Response.ErrorListener() {
