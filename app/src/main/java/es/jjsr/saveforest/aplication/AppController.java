@@ -16,7 +16,6 @@ import com.android.volley.toolbox.Volley;
 import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.sync.Synchronization;
-import es.jjsr.saveforest.volley.utils.LruBitmapCache;
 
 /**
  * Created by José Juan Sosa Rodríguez on 16/11/2017.
@@ -71,13 +70,13 @@ public class AppController extends Application{
         return mRequestQueue;
     }
 
-    public ImageLoader getImageLoader(){
+    /*public ImageLoader getImageLoader(){
         getRequestQueue();
         if (mImageLoader == null){
             mImageLoader = new ImageLoader(this.mRequestQueue, new LruBitmapCache());
         }
         return this.mImageLoader;
-    }
+    }*/
 
     public <T> void addToRequestQueue(Request<T> reg, String tag){
         reg.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
