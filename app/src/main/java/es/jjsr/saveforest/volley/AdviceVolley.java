@@ -1,5 +1,6 @@
 package es.jjsr.saveforest.volley;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.resource.constants.GConstants;
+import es.jjsr.saveforest.restful.ImageRest;
 import es.jjsr.saveforest.sync.Synchronization;
 
 /**
@@ -29,6 +31,11 @@ import es.jjsr.saveforest.sync.Synchronization;
 public class AdviceVolley {
     final static String TAG = "JJSR response webapp";
     final static String route = GConstants.ADVICES_SERVER_ROUTE + "/all-advices";
+    private static Context context;
+
+    public AdviceVolley(Context context) {
+        this.context = context;
+    }
 
     public static void getAllAdvices(){
         String tag_json_obj = "getAllAdvices";
@@ -59,7 +66,7 @@ public class AdviceVolley {
         AdviceGlobal.getmInstance().addToRequestQueue(getRequest, tag_json_obj);
     }
 
-    public static Boolean addAdvice(Advice advice, final boolean withBinnacle, final int idBinnacle){
+    public static Boolean addAdvice(final Advice advice, final boolean withBinnacle, final int idBinnacle){
         final Boolean[] value = {false};
         String tag_json_obj = "addAdvice";
         String url = GConstants.ADVICES_SERVER_ROUTE + "/insert-advices";
@@ -93,6 +100,9 @@ public class AdviceVolley {
                         Log.i(TAG, "It has been inserted correctly");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
+                        }
+                        if (advice.getNameImage() != null){
+                            new ImageRest(context).uploadImage(advice.getNameImage());
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                         value[0] = true;

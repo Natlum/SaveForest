@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import es.jjsr.saveforest.contentProviderPackage.Contract;
+
 /**
  * Clase que permite guardar una imagen en la memoria del dispositivo.
  * También permite obtener una imagen del dispositivo.
@@ -50,4 +52,14 @@ public class LoadAnsSaveImage {
         outputStream.close();
     }
 
+    public static Bitmap loadImageFromStorageToSaveOnServer(Context ctx, String fileName) throws FileNotFoundException {
+        //File file = ctx.getFileStreamPath(fileName);
+        File file = new File(ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName);
+        Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+        return bitmap;
+    }
+
+    public static String getPathImage(Context ctx, String fileName){
+        return ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName;
+    }
 }
