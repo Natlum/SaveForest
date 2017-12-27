@@ -30,7 +30,7 @@ public class ImageRest {
     public Boolean uploadImage(String fileName){
         try {
             String filePath = LoadAnsSaveImage.getPathImage(context, fileName);
-            Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, fileName);
+            //Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, fileName);
 
             String uploadId = UUID.randomUUID().toString();
 
@@ -38,7 +38,7 @@ public class ImageRest {
                 .addFileToUpload(filePath, "uploadFile")
                 .addParameter("uploadFile", fileName)
                 .setNotificationConfig(new UploadNotificationConfig())
-                .setMaxRetries(2)
+                .setMaxRetries(10)
                 .startUpload();
             Log.i(TAG, "Upload Imagen OK");
             return true;
