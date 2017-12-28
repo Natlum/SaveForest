@@ -31,11 +31,6 @@ import es.jjsr.saveforest.sync.Synchronization;
 public class AdviceVolley {
     final static String TAG = "JJSR response webapp";
     final static String route = GConstants.ADVICES_SERVER_ROUTE + "/all-advices";
-    private static Context context;
-
-    public AdviceVolley(Context context) {
-        this.context = context;
-    }
 
     public static void getAllAdvices(){
         String tag_json_obj = "getAllAdvices";
@@ -100,9 +95,6 @@ public class AdviceVolley {
                         Log.i(TAG, "It has been inserted correctly");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
-                        }
-                        if (advice.getNameImage() != null){
-                            new ImageRest(context).uploadImage(advice.getNameImage());
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                         value[0] = true;
