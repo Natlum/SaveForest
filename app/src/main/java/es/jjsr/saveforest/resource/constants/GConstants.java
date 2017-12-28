@@ -17,5 +17,6 @@ public class GConstants {
     public static final boolean VERSION_ADMINISTRATOR = true;
     public static final String SERVER_ROUTE = "http://jjsr.es:8080/WebASaveForest/webresources";
     public static final String ADVICES_SERVER_ROUTE = "http://jjsr.es:8080/WebASaveForest/webresources/advices";
-    public static final String IMAGES_SERVER_ROUTE = "http://jjsr.es:8080/WebASaveForest/webresources/image";
+    //public static final String IMAGES_SERVER_ROUTE = "http://jjsr.es:8080/WebASaveForest/webresources/image";
+    public static final String IMAGES_SERVER_ROUTE = "http://192.168.100.128:8080/WebASaveForest/webresources/image";
 }
