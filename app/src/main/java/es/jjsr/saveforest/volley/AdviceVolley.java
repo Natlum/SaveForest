@@ -1,6 +1,7 @@
 package es.jjsr.saveforest.volley;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -14,12 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 
 import es.jjsr.saveforest.aplication.AppController;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
+import es.jjsr.saveforest.resource.LoadAnsSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.restful.ImageRest;
 import es.jjsr.saveforest.sync.Synchronization;
@@ -31,6 +34,11 @@ import es.jjsr.saveforest.sync.Synchronization;
 public class AdviceVolley {
     final static String TAG = "JJSR response webapp";
     final static String route = GConstants.ADVICES_SERVER_ROUTE + "/all-advices";
+    private static Context context;
+
+    public AdviceVolley(Context context) {
+        this.context = context;
+    }
 
     public static void getAllAdvices(){
         String tag_json_obj = "getAllAdvices";
@@ -95,6 +103,14 @@ public class AdviceVolley {
                         Log.i(TAG, "It has been inserted correctly");
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
+                        }
+                        if (advice.getNameImage() != null){
+                            try {
+                                Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
+                                new ImageVolley(context).uploadBitmap(bitmap, advice.getNameImage());
+                            } catch (FileNotFoundException e) {
+                                Log.i(TAG, "Fail to load image from device");
+                            }
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                         value[0] = true;
