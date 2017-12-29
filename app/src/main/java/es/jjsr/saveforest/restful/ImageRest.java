@@ -1,7 +1,6 @@
 package es.jjsr.saveforest.restful;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -11,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.UUID;
 
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
 
 /**
@@ -29,8 +28,8 @@ public class ImageRest {
 
     public Boolean uploadImage(String fileName){
         try {
-            String filePath = LoadAnsSaveImage.getPathImage(context, fileName);
-            //Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, fileName);
+            String filePath = LoadAndSaveImage.getPathImage(context, fileName);
+            //Bitmap bitmap = LoadAndSaveImage.loadImageFromStorageToSaveOnServer(context, fileName);
 
             String uploadId = UUID.randomUUID().toString();
 

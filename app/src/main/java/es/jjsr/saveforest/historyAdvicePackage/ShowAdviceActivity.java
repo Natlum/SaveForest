@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 
 /**
  * Contiene lo necesario para mostrar el contenido de un aviso seleccionado.
@@ -118,7 +118,7 @@ public class ShowAdviceActivity extends AppCompatActivity implements OnMapReadyC
         if (advice.getNameImage() != null){
             ImageView imageViewAdvice = (ImageView) findViewById(R.id.imageViewAdvice);
             try {
-                LoadAnsSaveImage.loadImageFromStorage(this, advice.getNameImage(), imageViewAdvice);
+                LoadAndSaveImage.loadImageFromStorage(this, advice.getNameImage(), imageViewAdvice);
             } catch (FileNotFoundException e) {
                 Toast.makeText(this, getResources().getString(R.string.fail_load_image_from_file),
                         Toast.LENGTH_LONG).show();

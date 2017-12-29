@@ -19,7 +19,7 @@ import es.jjsr.saveforest.contentProviderPackage.Contract;
  * Created by José Juan Sosa Rodríguez on 12/11/2017.
  */
 
-public class LoadAnsSaveImage {
+public class LoadAndSaveImage {
 
     private final static String NAME_FOLDER_IMAGES = "Images";
 
@@ -48,7 +48,7 @@ public class LoadAnsSaveImage {
         }
 
         outputStream = new FileOutputStream(file);
-        image.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        image.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         outputStream.close();
     }
 

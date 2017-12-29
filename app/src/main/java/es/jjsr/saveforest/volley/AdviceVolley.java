@@ -18,13 +18,11 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 
-import es.jjsr.saveforest.aplication.AppController;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
-import es.jjsr.saveforest.restful.ImageRest;
 import es.jjsr.saveforest.sync.Synchronization;
 
 /**
@@ -106,8 +104,9 @@ public class AdviceVolley {
                         }
                         if (advice.getNameImage() != null){
                             try {
-                                Bitmap bitmap = LoadAnsSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
-                                new ImageVolley(context).uploadBitmap(bitmap, advice.getNameImage());
+                                Bitmap bitmap = LoadAndSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
+                                //new ImageVolley(context).uploadBitmap(bitmap, advice.getNameImage());
+                                ImageVolley.uploadImageToServer(bitmap, advice.getNameImage());
                             } catch (FileNotFoundException e) {
                                 Log.i(TAG, "Fail to load image from device");
                             }

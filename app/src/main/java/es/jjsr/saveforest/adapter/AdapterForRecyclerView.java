@@ -15,9 +15,7 @@ import java.util.List;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
-
-import static es.jjsr.saveforest.R.drawable.country_road_card;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 
 /**
  * Adaptador para crear las tarjetas de los avisos con la información de la base de datos.
@@ -55,7 +53,7 @@ public class AdapterForRecyclerView
         holder.textView.setText(tag);
         if (advices.get(position).getNameImage() != null){
             try {
-                LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
+                LoadAndSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
             } catch (FileNotFoundException e) {
                 holder.imageViewCardAdvice.setImageResource(R.drawable.country_road_card);
                 e.printStackTrace();
