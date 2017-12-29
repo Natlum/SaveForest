@@ -104,10 +104,12 @@ public class AdviceVolley {
                         }
                         if (advice.getNameImage() != null){
                             try {
-                                Bitmap bitmap = LoadAndSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
+                                //Bitmap bitmap = LoadAndSaveImage.loadImageFromStorageToSaveOnServer(context, advice.getNameImage());
                                 //new ImageVolley(context).uploadBitmap(bitmap, advice.getNameImage());
-                                ImageVolley.uploadImageToServer(bitmap, advice.getNameImage());
-                            } catch (FileNotFoundException e) {
+                                //ImageVolley.uploadImageToServer(bitmap, advice.getNameImage());
+                                String filePath = LoadAndSaveImage.getPathImage(context, advice.getNameImage());
+                                UploadImage.upload(filePath, advice.getNameImage());
+                            } catch (Exception e) {
                                 Log.i(TAG, "Fail to load image from device");
                             }
                         }

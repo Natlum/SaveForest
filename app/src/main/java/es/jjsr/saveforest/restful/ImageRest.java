@@ -3,8 +3,8 @@ package es.jjsr.saveforest.restful;
 import android.content.Context;
 import android.util.Log;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
+//import net.gotev.uploadservice.MultipartUploadRequest;
+//import net.gotev.uploadservice.UploadNotificationConfig;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
@@ -26,7 +26,7 @@ public class ImageRest {
         this.context = context;
     }
 
-    public Boolean uploadImage(String fileName){
+    /*public Boolean uploadImage(String fileName){
         try {
             String filePath = LoadAndSaveImage.getPathImage(context, fileName);
             //Bitmap bitmap = LoadAndSaveImage.loadImageFromStorageToSaveOnServer(context, fileName);
@@ -48,5 +48,5 @@ public class ImageRest {
             Log.i(TAG, "Fail upload image to server\n" + e.getMessage());
             return false;
         }
-    }
+    }*/
 }
