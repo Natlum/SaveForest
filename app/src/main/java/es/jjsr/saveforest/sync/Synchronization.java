@@ -85,7 +85,7 @@ public class Synchronization {
                     Advice advice = null;
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
-                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
+                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId(), context)){
                             value = true;
                         }else {
                             value = false;

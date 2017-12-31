@@ -50,4 +50,8 @@ public class LoadAnsSaveImage {
         outputStream.close();
     }
 
+    public static String getFilePath(Context ctx, String fileName){
+        return ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName;
+    }
+
 }
