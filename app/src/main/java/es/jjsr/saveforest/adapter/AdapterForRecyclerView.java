@@ -16,6 +16,7 @@ import java.util.List;
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.volley.ImageVolley;
 
 import static es.jjsr.saveforest.R.drawable.country_road_card;
 
@@ -57,7 +58,13 @@ public class AdapterForRecyclerView
             try {
                 LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
             } catch (FileNotFoundException e) {
-                holder.imageViewCardAdvice.setImageResource(R.drawable.country_road_card);
+                try {
+                    ImageVolley.imageRequest(advices.get(position).getNameImage(), ctx);
+                    Thread.sleep(2000);
+                    LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
+                }catch (Exception e2){
+                    holder.imageViewCardAdvice.setImageResource(R.drawable.country_road_card);
+                }
                 e.printStackTrace();
             }
         }
