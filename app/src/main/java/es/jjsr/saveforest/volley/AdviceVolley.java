@@ -55,6 +55,7 @@ public class AdviceVolley {
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                     }
                 });
+        getRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(getRequest, tag_json_obj);
     }
 
@@ -105,6 +106,7 @@ public class AdviceVolley {
                         value[0] = false;
                     }
                 });
+        postRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(postRequest, tag_json_obj);
         return value[0];
     }
@@ -156,6 +158,7 @@ public class AdviceVolley {
                         value[0] = false;
                     }
                 });
+        putRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(putRequest, tag_json_obj);
         return value[0];
     }
@@ -183,10 +186,14 @@ public class AdviceVolley {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i(TAG, "It has not been deleted");
+                        if (withBinnacle){
+                            BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
+                        }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                         value[0] = false;
                     }
                 });
+        delRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(delRequest, tag_json_obj);
         return value[0];
     }
