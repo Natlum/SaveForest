@@ -10,11 +10,12 @@ import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.ImageRequest;
 import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.request.StringRequest;
 
 import java.io.IOException;
 
 import es.jjsr.saveforest.dto.AdviceGlobal;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
 
 /**
@@ -25,6 +26,7 @@ public class ImageVolley {
     final static String TAG = "JJSR response webapp";
     final static String routeUpload = GConstants.IMAGES_SERVER_ROUTE + "/upload";
     final static String routeDownload = GConstants.IMAGES_SERVER_ROUTE + "/download/";
+    final static String routeDelete = GConstants.IMAGES_SERVER_ROUTE + "/delete/";
 
     public static void imageUpload(final String imagePath){
         SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, routeUpload,
@@ -52,7 +54,7 @@ public class ImageVolley {
                     public void onResponse(Bitmap response) {
                         Log.i(TAG, "Image is received");
                         try {
-                            LoadAnsSaveImage.saveImage(response, ctx, fileName);
+                            LoadAndSaveImage.saveImage(response, ctx, fileName);
                         } catch (IOException e) {
                             Log.i(TAG, "Fail to save image received\n" + e.getMessage());
                         }
@@ -65,5 +67,31 @@ public class ImageVolley {
                     }
                 });
         AdviceGlobal.getmInstance().addToRequestQueue(request);
+    }
+
+    public static void imageDelete(final String fileName){
+        String tag_json_obj = "deleteImage";
+        String url = routeDelete + fileName;
+
+        AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(true);
+
+        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG, "Image is deleted on server");
+                        AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i(TAG, "Image is not received");
+                        AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                    }
+                }
+        );
+
+        deleteRequest.setShouldCache(false);
+        AdviceGlobal.getmInstance().addToRequestQueue(deleteRequest, tag_json_obj);
     }
 }

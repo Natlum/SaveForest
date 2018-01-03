@@ -34,6 +34,7 @@ import es.jjsr.saveforest.adapter.AdapterForRecyclerView;
 import es.jjsr.saveforest.contentProviderPackage.AdviceProvider;
 import es.jjsr.saveforest.contentProviderPackage.Contract;
 import es.jjsr.saveforest.dto.Advice;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
 
 /**
@@ -141,6 +142,8 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             switch (menuItem.getItemId()){
                 case R.id.menu_delete:
+                    Advice advice = advices.get(cardSelected);
+                    LoadAndSaveImage.deleteImage(getContext(), advice.getNameImage());
                     AdviceProvider.deleteRecordWithBinnacle(getActivity().getContentResolver(), idAdvice);
                     break;
                 case R.id.menu_edit:

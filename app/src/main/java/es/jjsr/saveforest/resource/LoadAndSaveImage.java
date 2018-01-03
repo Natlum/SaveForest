@@ -17,7 +17,7 @@ import java.io.IOException;
  * Created by José Juan Sosa Rodríguez on 12/11/2017.
  */
 
-public class LoadAnsSaveImage {
+public class LoadAndSaveImage {
 
     private final static String NAME_FOLDER_IMAGES = "Images";
 
@@ -52,6 +52,12 @@ public class LoadAnsSaveImage {
 
     public static String getFilePath(Context ctx, String fileName){
         return ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName;
+    }
+
+    public static Boolean deleteImage(Context ctx, String fileName){
+        File file = new File(ctx.getFilesDir() + File.separator + NAME_FOLDER_IMAGES + File.separator + fileName);
+        Boolean deleted = file.delete();
+        return deleted;
     }
 
 }

@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,12 +86,23 @@ public class AdviceProvider {
     }
 
     public static void deleteRecordWithBinnacle(ContentResolver solve, int idAdvice){
+        Advice advice = null;
+        try {
+            advice = readFullRecord(solve, idAdvice);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.i("Resolv", "Nombre de la imagen que se le pasa al binnacle " + advice.getNameImage());
         deleteRecord(solve, idAdvice);
 
         Binnacle binnacle = new Binnacle();
         binnacle.setId_advice(idAdvice);
         binnacle.setOperation(GConstants.OPERATION_DELETE);
 
+        if (advice.getNameImage() != null){
+            binnacle.setImage_name(advice.getNameImage());
+        }
+        Log.i("Resolv", "Nombre que tiene guardado el binnacle" + binnacle.getImage_name());
         BinnacleProvider.insertRecord(solve, binnacle);
     }
 

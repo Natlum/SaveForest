@@ -15,10 +15,8 @@ import java.util.List;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.dto.Advice;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.volley.ImageVolley;
-
-import static es.jjsr.saveforest.R.drawable.country_road_card;
 
 /**
  * Adaptador para crear las tarjetas de los avisos con la información de la base de datos.
@@ -56,12 +54,12 @@ public class AdapterForRecyclerView
         holder.textView.setText(tag);
         if (advices.get(position).getNameImage() != null){
             try {
-                LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
+                LoadAndSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
             } catch (FileNotFoundException e) {
                 try {
                     ImageVolley.imageRequest(advices.get(position).getNameImage(), ctx);
                     Thread.sleep(2000);
-                    LoadAnsSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
+                    LoadAndSaveImage.loadImageFromStorage(ctx, advices.get(position).getNameImage(), holder.imageViewCardAdvice);
                 }catch (Exception e2){
                     holder.imageViewCardAdvice.setImageResource(R.drawable.country_road_card);
                 }

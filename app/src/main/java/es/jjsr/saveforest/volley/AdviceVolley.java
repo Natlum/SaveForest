@@ -19,7 +19,8 @@ import java.text.SimpleDateFormat;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.dto.Binnacle;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.sync.Synchronization;
 
@@ -97,7 +98,7 @@ public class AdviceVolley {
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
                         if (advice.getNameImage() != null){
-                            String filePath = LoadAnsSaveImage.getFilePath(ctx, advice.getNameImage());
+                            String filePath = LoadAndSaveImage.getFilePath(ctx, advice.getNameImage());
                             ImageVolley.imageUpload(filePath);
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
@@ -182,6 +183,11 @@ public class AdviceVolley {
                     public void onResponse(String response) {
                         Log.i(TAG, "It has been deleted correctly");
                         if (withBinnacle){
+                            Binnacle binnacle = BinnacleProvider.readRecord(AdviceGlobal.getResolver(), idBinnacle);
+                            Log.i(TAG, "Nombre de la imagen a borrar " + binnacle.getImage_name());
+                            if (binnacle.getImage_name() != null){
+                                ImageVolley.imageDelete(binnacle.getImage_name());
+                            }
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
