@@ -16,6 +16,7 @@ import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.dto.Binnacle;
 import es.jjsr.saveforest.resource.constants.GConstants;
+import es.jjsr.saveforest.sync.Synchronization;
 
 /**
  * Proveedor de acceso a la tabla Advice.
@@ -92,7 +93,7 @@ public class AdviceProvider {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.i("Resolv", "Nombre de la imagen que se le pasa al binnacle " + advice.getNameImage());
+
         deleteRecord(solve, idAdvice);
 
         Binnacle binnacle = new Binnacle();
@@ -102,8 +103,10 @@ public class AdviceProvider {
         if (advice.getNameImage() != null){
             binnacle.setImage_name(advice.getNameImage());
         }
-        Log.i("Resolv", "Nombre que tiene guardado el binnacle" + binnacle.getImage_name());
+
         BinnacleProvider.insertRecord(solve, binnacle);
+
+        sycnUp();
     }
 
     public static void updateRecord(ContentResolver solve, Advice advice){
@@ -122,6 +125,8 @@ public class AdviceProvider {
         binnacle.setOperation(GConstants.OPERATION_UPDATE);
 
         BinnacleProvider.insertRecord(solve, binnacle);
+
+        sycnUp();
     }
 
     public static Advice readRecord(ContentResolver solve, int idAdvice){
@@ -221,5 +226,10 @@ public class AdviceProvider {
         }
 
         return advices;
+    }
+
+    private static void sycnUp(){
+        AdviceGlobal.getmInstance().setSynchronization(new Synchronization(AdviceGlobal.getmInstance().getApplicationContext()));
+        AdviceGlobal.getmInstance().getSynchronization().syncUp();
     }
 }

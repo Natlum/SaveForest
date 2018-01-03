@@ -1,7 +1,5 @@
 package es.jjsr.saveforest.dto;
 
-import com.android.volley.request.StringRequest;
-
 import es.jjsr.saveforest.resource.constants.GConstants;
 
 /**

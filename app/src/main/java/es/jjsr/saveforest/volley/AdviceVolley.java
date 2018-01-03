@@ -184,7 +184,7 @@ public class AdviceVolley {
                         Log.i(TAG, "It has been deleted correctly");
                         if (withBinnacle){
                             Binnacle binnacle = BinnacleProvider.readRecord(AdviceGlobal.getResolver(), idBinnacle);
-                            Log.i(TAG, "Nombre de la imagen a borrar " + binnacle.getImage_name());
+                            Log.i(TAG, "Image to delete: " + binnacle.getImage_name());
                             if (binnacle.getImage_name() != null){
                                 ImageVolley.imageDelete(binnacle.getImage_name());
                             }

@@ -85,7 +85,7 @@ public class ImageVolley {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i(TAG, "Image is not received");
+                        Log.i(TAG, "Image is not deleted on server");
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                     }
                 }
