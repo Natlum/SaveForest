@@ -57,7 +57,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + BINNACLE_TABLE_NAME
                 + "( " + Contract.Binnacle.ID + " INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, "
                 + Contract.Binnacle.ID_ADVICE + " INTEGER, "
-                + Contract.Binnacle.OPERATION + " INTEGER ); "
+                + Contract.Binnacle.OPERATION + " INTEGER,"
+                + Contract.Binnacle.IMAGE_NAME + " ); "
         );
 
         //initializerData(db);

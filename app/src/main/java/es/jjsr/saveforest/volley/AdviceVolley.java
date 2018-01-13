@@ -1,13 +1,14 @@
 package es.jjsr.saveforest.volley;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.JsonArrayRequest;
+import com.android.volley.request.JsonObjectRequest;
+import com.android.volley.request.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,10 +16,11 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 
-import es.jjsr.saveforest.aplication.AppController;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
+import es.jjsr.saveforest.dto.Binnacle;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.sync.Synchronization;
 
@@ -45,6 +47,7 @@ public class AdviceVolley {
                         Log.i(TAG, "Display response");
                         Synchronization.doUpdatesFromServerOnceGot(response);
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
+                        Log.i(TAG, response.toString());
                     }
                 },
                 new Response.ErrorListener() {
@@ -55,10 +58,11 @@ public class AdviceVolley {
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                     }
                 });
+        getRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(getRequest, tag_json_obj);
     }
 
-    public static Boolean addAdvice(Advice advice, final boolean withBinnacle, final int idBinnacle){
+    public static Boolean addAdvice(final Advice advice, final boolean withBinnacle, final int idBinnacle, final Context ctx){
         final Boolean[] value = {false};
         String tag_json_obj = "addAdvice";
         String url = GConstants.ADVICES_SERVER_ROUTE + "/insert-advices";
@@ -93,6 +97,10 @@ public class AdviceVolley {
                         if (withBinnacle){
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
+                        if (advice.getNameImage() != null){
+                            String filePath = LoadAndSaveImage.getFilePath(ctx, advice.getNameImage());
+                            ImageVolley.imageUpload(filePath);
+                        }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                         value[0] = true;
                     }
@@ -105,6 +113,7 @@ public class AdviceVolley {
                         value[0] = false;
                     }
                 });
+        postRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(postRequest, tag_json_obj);
         return value[0];
     }
@@ -156,6 +165,7 @@ public class AdviceVolley {
                         value[0] = false;
                     }
                 });
+        putRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(putRequest, tag_json_obj);
         return value[0];
     }
@@ -173,6 +183,11 @@ public class AdviceVolley {
                     public void onResponse(String response) {
                         Log.i(TAG, "It has been deleted correctly");
                         if (withBinnacle){
+                            Binnacle binnacle = BinnacleProvider.readRecord(AdviceGlobal.getResolver(), idBinnacle);
+                            Log.i(TAG, "Image to delete: " + binnacle.getImage_name());
+                            if (binnacle.getImage_name() != null){
+                                ImageVolley.imageDelete(binnacle.getImage_name());
+                            }
                             BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
                         }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
@@ -183,10 +198,14 @@ public class AdviceVolley {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i(TAG, "It has not been deleted");
+                        if (withBinnacle){
+                            BinnacleProvider.deleteRecord(AdviceGlobal.getResolver(), idBinnacle);
+                        }
                         AdviceGlobal.getmInstance().getSynchronization().setWaitingForServerResponse(false);
                         value[0] = false;
                     }
                 });
+        delRequest.setShouldCache(false);
         AdviceGlobal.getmInstance().addToRequestQueue(delRequest, tag_json_obj);
         return value[0];
     }

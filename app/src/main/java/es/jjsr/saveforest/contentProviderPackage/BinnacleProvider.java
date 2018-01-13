@@ -1,6 +1,5 @@
 package es.jjsr.saveforest.contentProviderPackage;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -24,6 +23,7 @@ public class BinnacleProvider {
         ContentValues values = new ContentValues();
         values.put(Contract.Binnacle.ID_ADVICE, binnacle.getId_advice());
         values.put(Contract.Binnacle.OPERATION, binnacle.getOperation());
+        values.put(Contract.Binnacle.IMAGE_NAME, binnacle.getImage_name());
 
         solve.insert(uri, values);
     }
@@ -47,7 +47,8 @@ public class BinnacleProvider {
 
         String[] projection = {
                 Contract.Binnacle.ID_ADVICE,
-                Contract.Binnacle.OPERATION
+                Contract.Binnacle.OPERATION,
+                Contract.Binnacle.IMAGE_NAME
         };
 
         Cursor cursor = solve.query(uri, projection, null, null, null);
@@ -57,6 +58,7 @@ public class BinnacleProvider {
             binnacle.setId(idBinnacle);
             binnacle.setId_advice(cursor.getInt(cursor.getColumnIndex(Contract.Binnacle.ID_ADVICE)));
             binnacle.setOperation(cursor.getInt(cursor.getColumnIndex(Contract.Binnacle.OPERATION)));
+            binnacle.setImage_name(cursor.getString(cursor.getColumnIndex(Contract.Binnacle.IMAGE_NAME)));
             return binnacle;
         }else {
             return null;

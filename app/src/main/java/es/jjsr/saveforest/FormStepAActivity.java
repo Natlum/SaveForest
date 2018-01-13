@@ -22,7 +22,7 @@ import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
 import es.jjsr.saveforest.fragments.StepA.ValidateContentStepA;
 import es.jjsr.saveforest.resource.InsertAdvice;
-import es.jjsr.saveforest.resource.LoadAnsSaveImage;
+import es.jjsr.saveforest.resource.LoadAndSaveImage;
 
 /**
  * Esta es la actividad que se ejecuta cuando se quiere enviar un aviso con información de gps, foto...
@@ -115,7 +115,7 @@ public class FormStepAActivity extends AppCompatActivity {
         if (mSectionsPagerAdapter.getStep1().getPhoto() != null){
             try {
                 fileImageName = "SaveForest-" + formatedDate + ".jpg";
-                LoadAnsSaveImage.saveImage(mSectionsPagerAdapter.getStep1().getPhoto(), this, fileImageName);
+                LoadAndSaveImage.saveImage(mSectionsPagerAdapter.getStep1().getPhoto(), this, fileImageName);
             } catch (IOException e) {
                 fileImageName = null;
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.fail_save_image_file),

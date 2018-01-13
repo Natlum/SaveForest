@@ -11,17 +11,20 @@ public class Binnacle {
     private int id;
     private int id_advice;
     private int operation;
+    private String image_name;
 
     public Binnacle() {
         this.id = GConstants.SIN_VALOR_INT;
         this.id_advice = GConstants.SIN_VALOR_INT;
         this.operation = GConstants.SIN_VALOR_INT;
+        this.image_name = null;
     }
 
-    public Binnacle(int id, int id_advice, int operation) {
+    public Binnacle(int id, int id_advice, int operation, String image_name) {
         this.id = id;
         this.id_advice = id_advice;
         this.operation = operation;
+        this.image_name = image_name;
     }
 
     public int getId() {
@@ -46,5 +49,13 @@ public class Binnacle {
 
     public void setOperation(int operation) {
         this.operation = operation;
+    }
+
+    public String getImage_name() {
+        return image_name;
+    }
+
+    public void setImage_name(String image_name) {
+        this.image_name = image_name;
     }
 }

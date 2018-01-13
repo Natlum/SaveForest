@@ -16,6 +16,7 @@ import java.util.Date;
 import es.jjsr.saveforest.contentProviderPackage.AdviceProvider;
 import es.jjsr.saveforest.contentProviderPackage.BinnacleProvider;
 import es.jjsr.saveforest.dto.Advice;
+import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.dto.Binnacle;
 import es.jjsr.saveforest.resource.constants.GConstants;
 import es.jjsr.saveforest.volley.AdviceVolley;
@@ -84,7 +85,7 @@ public class Synchronization {
                     Advice advice = null;
                     try {
                         advice = AdviceProvider.readFullRecord(resolver, binnacle.getId_advice());
-                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId())){
+                        if (AdviceVolley.addAdvice(advice, true, binnacle.getId(), context)){
                             value = true;
                         }else {
                             value = false;

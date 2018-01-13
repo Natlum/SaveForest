@@ -49,5 +49,6 @@ public class Contract {
         public static final String ID = "id";
         public static final String ID_ADVICE = "idAdvice";
         public static final String OPERATION = "operation";
+        public static final String IMAGE_NAME = "imageName";
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.resource.ResetAdviceGlobal;
+import es.jjsr.saveforest.sync.Synchronization;
 
 /**
  * Esta actividad se muestra cuando se ha guardado el aviso en la base de datos.
@@ -34,6 +35,9 @@ public class FinishAdviceActivity extends AppCompatActivity {
         }
 
         new ResetAdviceGlobal(this);
+
+        AdviceGlobal.getmInstance().setSynchronization(new Synchronization(getApplicationContext()));
+        AdviceGlobal.getmInstance().getSynchronization().syncUp();
     }
 
 }

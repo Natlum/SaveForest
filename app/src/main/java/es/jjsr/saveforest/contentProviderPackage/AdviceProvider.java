@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import es.jjsr.saveforest.dto.Advice;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.dto.Binnacle;
 import es.jjsr.saveforest.resource.constants.GConstants;
+import es.jjsr.saveforest.sync.Synchronization;
 
 /**
  * Proveedor de acceso a la tabla Advice.
@@ -85,13 +87,26 @@ public class AdviceProvider {
     }
 
     public static void deleteRecordWithBinnacle(ContentResolver solve, int idAdvice){
+        Advice advice = null;
+        try {
+            advice = readFullRecord(solve, idAdvice);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         deleteRecord(solve, idAdvice);
 
         Binnacle binnacle = new Binnacle();
         binnacle.setId_advice(idAdvice);
         binnacle.setOperation(GConstants.OPERATION_DELETE);
 
+        if (advice.getNameImage() != null){
+            binnacle.setImage_name(advice.getNameImage());
+        }
+
         BinnacleProvider.insertRecord(solve, binnacle);
+
+        sycnUp();
     }
 
     public static void updateRecord(ContentResolver solve, Advice advice){
@@ -110,6 +125,8 @@ public class AdviceProvider {
         binnacle.setOperation(GConstants.OPERATION_UPDATE);
 
         BinnacleProvider.insertRecord(solve, binnacle);
+
+        sycnUp();
     }
 
     public static Advice readRecord(ContentResolver solve, int idAdvice){
@@ -209,5 +226,10 @@ public class AdviceProvider {
         }
 
         return advices;
+    }
+
+    private static void sycnUp(){
+        AdviceGlobal.getmInstance().setSynchronization(new Synchronization(AdviceGlobal.getmInstance().getApplicationContext()));
+        AdviceGlobal.getmInstance().getSynchronization().syncUp();
     }
 }
