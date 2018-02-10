@@ -1,0 +1,114 @@
+<resources>
+	<!-- Activity Main -->
+    <string name="app_name">Save Forest</string>
+    <string name="fail_message">An error occurred while loading the application</string>
+
+    <!-- Navigation View -->
+    <string name="nav_header_title">Save the Forest</string>
+    <string name="nav_header_subtitle">Protect what matters most</string>
+    <string name="new_advice">New notice</string>
+    <string name="history_advice">Notification history</string>
+    <string name="aboutUs">About ...</string>
+    <string name="download">Download the manual</string>
+    <string name="navigation_drawer_open">Open side menu</string>
+    <string name="navigation_drawer_close">Close side menu</string>
+
+    <!-- AppBar Menu -->
+    <string name="help_button">Help</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Activity Start -->
+    <string name="title">New notice form</string>
+    <string name="write_name">Your full name here</string>
+    <string name="call_me">Do you want us to call you?</string>
+    <string name="next_activity">Continue</string>
+    <string name="message_form">You must enter a name</string> <!-- This is no longer used here -->
+    <string name="error_required_field">Mandatory field</string>
+
+    <!-- Activity FormStepB -->
+    <string name="title_activity_form_step_bavtivity">Call form</string>
+    <string name="thanks">Thank you very much</string>
+    <string name="message">You will receive a call shortly.</string>
+    <string name="phone_number">Your phone number here</string>
+    <string name="phone_number_title">Phone number</string>
+
+    <!-- Activity FormStepA -->
+    <string name="title_activity_form_step_a">Notice form</string>
+    <string-array name="tabs_name">
+        <item>Step 1</item>
+        <item>Step 2</item>
+    </string-array>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Activity About Us -->
+    <string name="author">José Juan Sosa Rodríguez</string>
+    <string name="about_us_text">\t This is the project, created for 3rd of DAM of the IES El Rincón institute.
+                                \n\n \t This application is designed so that any user can send a
+                                notification to emergency services and thus avoid possible catastrophes:
+                                (Fires, Landslides, Accidents ...)</string>
+
+    <!-- Activity History Advice -->
+    <string name="title_activity_history_advice">Notification history</string>
+
+    <!-- Activity Help -->
+    <string name="title_activity_help">Help</string>
+    <string-array name="help">
+        <item>\t Enter your name and press continue. \n\n\t If you check the box to receive a call,
+            You will be asked for the phone number and you will receive a call from the emergency service as soon as possible.</item>
+        <item>\t Select or take a picture with the camera, a brief description of the incident, check
+            the location to make the notice as accurate as possible and finally fill in the required information.
+            \n\n\t By clicking on send, the emergency services will receive your notice, maybe
+            try to get in touch with you.</item>
+        <item>\t Select the country, enter your phone number without the extension of your country. \n\n\t
+            Insert a brief description of the incident. \n\t You will receive a call from the emergency service what
+            as soon as possible.</item>
+        <item>\t A list of each of the notifications made by this mobile phone is displayed.
+            \n\n\t When clicking on any of the warnings, all the information of that warning will be moved.</item>
+    </string-array>
+	
+	<!-- Fragment StepA Step1 -->
+    <string name="button_photo">Add Photo</string>
+    <string name="text_description">Enter a short description</string>
+    <string name="button_next">Next</string>
+
+    <!-- Fragment StepA Step2 -->
+    <string name="title_countries">Select the country</string>
+    <string name="gps">Add GPS location</string>
+    <string name="send_step_a">Send</string>
+    <string name="mark">Your position is: (</string>
+    <string name="permission_denied">You must give the application permission or enable GPS to add the GPS location.</string>
+    <string name="validate_location">You must add the location</string>
+    <string name="fail_load_countries">The list of countries could not be loaded.</string>
+    <string name="tag">Warning</string>
+    <string name="fail_save_advice">The warning was not saved due to an error in the content provider</string>
+    <string name="congrat_save_advice">The warning has been saved in the content provider</string>
+
+    <!-- Activity FinishAdvice -->
+    <string name="title_activity_finish_advice">Sent notice</string>
+    <string name="message_finish">Your notice has been sent.</string>
+
+    <!-- Edit Advice from History Advices -->
+    <string name="context_menu_delete">Delete</string>
+    <string name="context_menu_edit">Edit</string>
+    <string name="title_activity_update_advice">Update notice</string>
+    <string name="id_advice">Warning identifier:</string>
+    <string name="description">Description</string>
+    <string name="advices_is_empty">The message history is empty</string>
+
+    <!-- Show Advice from History Advices -->
+    <string name="title_activity_show_advice">Notice no:</string>
+    <string name="date">Date </string>
+    <string name="location">Location </string>
+    <string name="mark_show_advice">The location of the notice is:</string>
+    <string name="fail_save_image_file">An error occurred while trying to save the image on the device.</string>
+    <string name="fail_load_image_from_file">Error loading the warning image.</string>
+
+    <!-- Download Manual -->
+    <string name="fail_connection_download">Connection of the download of the manual not performed correctly</string>
+    <string name="correct_connection_download">Download was successful</string>
+    <string name="message_downloading">Downloading PDF...</string>
+    <string name="not_found_pdf_viewer">You must have a PDF viewer installed to open the manual.</string>
+    <string name="fail_save_manual">Error saving the document</string>
+    <string name="country_table_updated">The countries table has been updated.</string>
+
+</resources>
