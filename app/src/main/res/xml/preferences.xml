@@ -2,7 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <CheckBoxPreference
         android:key="pref_admin"
-        android:title="Administrador"
-        android:summary="Este es el sumario"
+        android:title="@string/administrator"
+        android:summary="@string/administrator_text"
         android:defaultValue="true"/>
+    <ListPreference
+        android:title="@string/language"
+        android:summary="@string/select_language"
+        android:key="pref_language"
+        android:defaultValue="1"
+        android:entries="@array/language_array"
+        android:entryValues="@array/language_array"
+        android:dialogTitle="@string/select_language"/>
 </PreferenceScreen>

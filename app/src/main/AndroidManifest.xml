@@ -123,6 +123,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.jjsr.saveforest.HistoryAdviceActivity" />
         </activity>
+        <activity
+            android:name=".resource.SettingActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".StartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.jjsr.saveforest.HistoryAdviceActivity" />
+        </activity>
 
         <provider
             android:name=".contentProviderPackage.MyContentProvider"
@@ -155,7 +165,6 @@
                 android:resource="@xml/syncadapter" />
         </service>
 
-        <activity android:name=".resource.SettingActivity"></activity>
     </application>
 
 </manifest>

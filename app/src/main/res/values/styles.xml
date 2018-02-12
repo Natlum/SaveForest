@@ -60,4 +60,12 @@
         <item name="android:textColor">@color/textCard</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Toolbar Setting Activity -->
+    <style name="ToolbarColoredBackArrow" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
 </resources>

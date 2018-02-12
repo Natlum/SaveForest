@@ -111,4 +111,10 @@
     <string name="fail_save_manual">Error saving the document</string>
     <string name="country_table_updated">The countries table has been updated.</string>
 
+    <!-- Preferences -->
+    <string name="administrator">Administrator</string>
+    <string name="administrator_text">Administrator session</string>
+    <string name="language">Language</string>
+    <string name="select_language">Select the language</string>
+
 </resources>
