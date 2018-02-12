@@ -18,7 +18,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.io.InputStream;
+
 import es.jjsr.saveforest.resource.DownloadManualAsyncTask;
+import es.jjsr.saveforest.resource.SettingActivity;
+
 
 /**
  * Esta es la actividad principal, contiene el menú lateral.
@@ -141,7 +145,8 @@ public class StartActivity extends AppCompatActivity
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_action_settings) {
-
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
