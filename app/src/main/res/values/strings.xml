@@ -118,5 +118,6 @@
     <string name="select_language">Seleccione el idioma</string>
     <string name="author_web">Web</string>
     <string name="web">https://jjsr.es</string>
+    <string name="pref_array_default">Español</string>
 
 </resources>

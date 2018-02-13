@@ -2,9 +2,11 @@ package es.jjsr.saveforest.historyAdvicePackage;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -98,7 +100,10 @@ public class HistoryAdviceListFragment extends Fragment implements LoaderManager
                     startActivity(intent);
                 }
             });
-            if (GConstants.VERSION_ADMINISTRATOR){
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            boolean adminPreferences = sharedPreferences.getBoolean("pref_admin", true);
+            if (adminPreferences){
                 mAdapter.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {

@@ -9,7 +9,7 @@
         android:title="@string/language"
         android:summary="@string/select_language"
         android:key="pref_language"
-        android:defaultValue="1"
+        android:defaultValue="@string/pref_array_default"
         android:entries="@array/language_array"
         android:entryValues="@array/language_array"
         android:dialogTitle="@string/select_language"/>
