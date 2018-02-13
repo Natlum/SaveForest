@@ -10,6 +10,7 @@
     <string name="history_advice">Historial de avisos</string>
     <string name="aboutUs">Acerca de &#8230;</string>
     <string name="download">Descargar el manual</string>
+    <string name="menu_more_options">Más opciones</string>
     <string name="navigation_drawer_open">Abrir menú lateral</string>
     <string name="navigation_drawer_close">Cerrar menú lateral</string>
 
@@ -106,7 +107,7 @@
     <!-- Download Manual -->
     <string name="fail_connection_download">Conexíon de la descarga del manual no realizada correctamente</string>
     <string name="correct_connection_download">Se realizó la descarga correctamente</string>
-    <string name="message_downloading">Descargando PDF...</string>
+    <string name="message_downloading">Descargando PDF&#8230;</string>
     <string name="not_found_pdf_viewer">Debe tener instalado un visor PDF para poder abrir el manual.</string>
     <string name="fail_save_manual">Error al guardar el documento</string>
     <string name="country_table_updated">Se ha actualizado la tabla paises.</string>

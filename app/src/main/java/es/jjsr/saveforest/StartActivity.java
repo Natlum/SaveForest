@@ -145,10 +145,6 @@ public class StartActivity extends AppCompatActivity
         } else if (id == R.id.nav_action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         } else if (id == R.id.nav_download){
             downloadManual();
         }

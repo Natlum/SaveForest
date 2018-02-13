@@ -8,8 +8,9 @@
     <string name="nav_header_subtitle">Protect what matters most</string>
     <string name="new_advice">New notice</string>
     <string name="history_advice">Notification history</string>
-    <string name="aboutUs">About ...</string>
+    <string name="aboutUs">About &#8230;</string>
     <string name="download">Download the manual</string>
+    <string name="menu_more_options">More Options</string>
     <string name="navigation_drawer_open">Open side menu</string>
     <string name="navigation_drawer_close">Close side menu</string>
 
@@ -45,7 +46,7 @@
     <string name="about_us_text">\t This is the project, created for 3rd of DAM of the IES El Rincón institute.
                                 \n\n \t This application is designed so that any user can send a
                                 notification to emergency services and thus avoid possible catastrophes:
-                                (Fires, Landslides, Accidents ...)</string>
+                                (Fires, Landslides, Accidents &#8230;)</string>
 
     <!-- Activity History Advice -->
     <string name="title_activity_history_advice">Notification history</string>
@@ -106,7 +107,7 @@
     <!-- Download Manual -->
     <string name="fail_connection_download">Connection of the download of the manual not performed correctly</string>
     <string name="correct_connection_download">Download was successful</string>
-    <string name="message_downloading">Downloading PDF...</string>
+    <string name="message_downloading">Downloading PDF&#8230;</string>
     <string name="not_found_pdf_viewer">You must have a PDF viewer installed to open the manual.</string>
     <string name="fail_save_manual">Error saving the document</string>
     <string name="country_table_updated">The countries table has been updated.</string>
