@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
-        android:key="pref_admin"
-        android:title="@string/administrator"
-        android:summary="@string/administrator_text"
-        android:defaultValue="false"/>
-    <ListPreference
-        android:title="@string/language"
-        android:summary="@string/select_language"
-        android:key="pref_language"
-        android:defaultValue="@string/pref_array_default"
-        android:entries="@array/language_array"
-        android:entryValues="@array/language_array"
-        android:dialogTitle="@string/select_language"/>
+    <PreferenceCategory
+        android:title="@string/general_settings"
+        android:key="general_settings">
+        <CheckBoxPreference
+            android:key="pref_admin"
+            android:title="@string/administrator"
+            android:summary="@string/administrator_text"
+            android:defaultValue="false"/>
+        <ListPreference
+            android:title="@string/language"
+            android:summary="@string/select_language"
+            android:key="pref_language"
+            android:defaultValue="es"
+            android:entries="@array/language_array"
+            android:entryValues="@array/language_array_values"
+            android:dialogTitle="@string/select_language"/>
+    </PreferenceCategory>
     <Preference android:title="@string/author_web">
         <intent android:action="android.intent.action.VIEW"
                 android:data="@string/web"/>

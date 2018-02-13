@@ -4,4 +4,8 @@
         <item>English</item>
         <item>Español</item>
     </string-array>
+    <string-array name="language_array_values">
+        <item>en</item>
+        <item>es</item>
+    </string-array>
 </resources>

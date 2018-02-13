@@ -1,7 +1,7 @@
 <resources>
     <!-- Activity Main -->
     <string name="app_name">Save Forest</string>
-    <string name="fail_message">Se ha producido un erro al cargar la aplicación</string>
+    <string name="fail_message">Se ha producido un error al cargar la aplicación</string>
 
     <!-- Navigation View -->
     <string name="nav_header_title">Save the Forest</string>
@@ -119,5 +119,6 @@
     <string name="author_web">Web</string>
     <string name="web">https://jjsr.es</string>
     <string name="pref_array_default">Español</string>
+    <string name="general_settings">Ajustes Generales</string>
 
 </resources>
