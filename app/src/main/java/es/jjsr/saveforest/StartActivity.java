@@ -18,10 +18,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import java.io.InputStream;
-
 import es.jjsr.saveforest.resource.DownloadManualAsyncTask;
-import es.jjsr.saveforest.resource.SettingActivity;
+import es.jjsr.saveforest.resource.SettingsActivity;
 
 
 /**
@@ -116,9 +114,9 @@ public class StartActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }else if (id == R.id.action_help){
+        }else */if (id == R.id.action_help){
             Intent intent = new Intent(context, HelpActivity.class);
             intent.putExtra("help_activity", "start");
             startActivity(intent);
@@ -145,7 +143,7 @@ public class StartActivity extends AppCompatActivity
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_action_settings) {
-            Intent intent = new Intent(this, SettingActivity.class);
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
 

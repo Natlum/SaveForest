@@ -124,7 +124,7 @@
                 android:value="es.jjsr.saveforest.HistoryAdviceActivity" />
         </activity>
         <activity
-            android:name=".resource.SettingActivity"
+            android:name=".resource.SettingsActivity"
             android:label="@string/action_settings"
             android:parentActivityName=".StartActivity"
             android:screenOrientation="portrait"

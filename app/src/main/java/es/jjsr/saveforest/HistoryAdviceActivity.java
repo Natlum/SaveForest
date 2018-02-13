@@ -48,9 +48,9 @@ public class HistoryAdviceActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_help) {
+        } else */if (id == R.id.action_help) {
             Intent intent = new Intent(this, HelpActivity.class);
             intent.putExtra("help_activity", "history");
             startActivity(intent);

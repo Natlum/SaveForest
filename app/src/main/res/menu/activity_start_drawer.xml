@@ -20,6 +20,7 @@
         <item
             android:id="@+id/nav_action_settings"
             android:icon="@drawable/ic_menu_manage"
+            android:checkable="false"
             android:title="@string/action_settings" />
     </group>
 

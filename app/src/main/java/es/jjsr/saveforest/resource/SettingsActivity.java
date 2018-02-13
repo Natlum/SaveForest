@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import es.jjsr.saveforest.R;
 
-public class SettingActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

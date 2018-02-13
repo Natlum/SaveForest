@@ -116,5 +116,7 @@
     <string name="administrator_text">Administrator session</string>
     <string name="language">Language</string>
     <string name="select_language">Select the language</string>
+    <string name="author_web">Web</string>
+    <string name="web">https://jjsr.es</string>
 
 </resources>
