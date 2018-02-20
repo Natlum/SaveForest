@@ -1,16 +1,22 @@
 package es.jjsr.saveforest.fragments.StepA;
 
-
-
+import android.Manifest;
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +34,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import es.jjsr.saveforest.R;
 import es.jjsr.saveforest.contentProviderPackage.Contract;
-import es.jjsr.saveforest.resource.GPSPositionActivity;
-
-import static android.app.Activity.RESULT_OK;
+import es.jjsr.saveforest.resource.GPSService;
 
 /**
  * Contiene lo necesario para manejar el paso 2 en el formulario de nuevo aviso.
@@ -50,14 +55,16 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
     private double latitude = 0;
     private double longitude = 0;
     private int idCountry = 0;
-    int request_code = 1;
     CheckBox checkBoxGPS;
+    private Marker marker;
 
     private String [] arrayNameCountries;
     int [] arrayIdCountries;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
     private View v;
+
+    private static final int PETITION_PERMISSION_LOCATION = 101;
 
     public Step2Fragment() {
         // Required empty public constructor
@@ -80,7 +87,12 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
 
         //spinnerStart(v);
         mapStart();
-        gpsStart(v);
+        initElements(v);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(GPSService.ACTION);
+        Receiver receiver = new Receiver();
+        getActivity().registerReceiver(receiver, filter);
 
         return v;
     }
@@ -121,32 +133,34 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
         });
     }
 
-    private void gpsStart(View v){
+    private void initElements(View v){
+        ejecuteService();
+
         checkBoxGPS = v.findViewById(R.id.checkBoxGPS);
         checkBoxGPS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(checkBoxGPS.isChecked()){
-                    Intent intent = new Intent(getContext(), GPSPositionActivity.class);
-                    startActivityForResult(intent, request_code);
+                    if (isMyServiceRunning(GPSService.class)){
+                        if (latitude != 0 || longitude != 0){
+                            gpsPositionMaps(latitude, longitude);
+                            getActivity().stopService(new Intent(getActivity(), GPSService.class));
+                        }else {
+                            setDefaultMaps();
+                        }
+                    }else {
+                        ejecuteService();
+                        setDefaultMaps();
+                    }
                 }
             }
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == requestCode && resultCode == RESULT_OK){
-            latitude = data.getExtras().getDouble("latitude");
-            longitude = data.getExtras().getDouble("longitude");
-        }
-        if (latitude != 0 || longitude != 0){
-            gpsPositionMaps(latitude, longitude);
-        }else {
-            gpsPositionMaps(28.128092, -15.446435);
-            Toast.makeText(getContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
-            checkBoxGPS.setChecked(false);
-        }
+    private void setDefaultMaps(){
+        gpsPositionMaps(28.128092, -15.446435);
+        Toast.makeText(getContext(), getString(R.string.permission_denied), Toast.LENGTH_LONG).show();
+        checkBoxGPS.setChecked(false);
     }
 
     private void gpsPositionMaps(double latitude, double longitude){
@@ -166,7 +180,12 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
     }
 
     private void insertMark(double latitude, double longitude){
-        map.addMarker(new MarkerOptions()
+        try {
+            marker.remove();
+        }catch (Exception e){
+            Log.e("RemoveMarker", "Fail to load marker");
+        }
+        marker = map.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(getString(R.string.mark)+ latitude + ", " + longitude +")"));
     }
@@ -240,4 +259,42 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
+    private void ejecuteService(){
+        if (ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PETITION_PERMISSION_LOCATION);
+        } else {
+            getActivity().startService(new Intent(getActivity(), GPSService.class));
+        }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public class Receiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(GPSService.ACTION)){
+                Log.e("onReceive","onReceive called");
+                latitude = intent.getDoubleExtra("latitude", 0);
+                longitude = intent.getDoubleExtra("longitude", 0);
+                Log.e("receiver", "Got Latitude: " + latitude);
+                Log.e("receiver", "Got Longitude: " + longitude);
+                gpsPositionMaps(latitude, longitude);
+            }
+        }
+    }
+
 }

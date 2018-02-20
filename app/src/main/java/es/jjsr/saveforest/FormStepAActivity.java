@@ -1,6 +1,7 @@
 package es.jjsr.saveforest;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +23,7 @@ import java.util.Date;
 import es.jjsr.saveforest.dto.AdviceGlobal;
 import es.jjsr.saveforest.fragments.StepA.SectionsPagerAdapter;
 import es.jjsr.saveforest.fragments.StepA.ValidateContentStepA;
+import es.jjsr.saveforest.resource.GPSService;
 import es.jjsr.saveforest.resource.InsertAdvice;
 import es.jjsr.saveforest.resource.LoadAndSaveImage;
 
@@ -45,6 +48,9 @@ public class FormStepAActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+
+    private static final int PETITION_PERMISSION_LOCATION = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,4 +158,31 @@ public class FormStepAActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Log.e("Request", "In resquest permission result");
+        if (requestCode == PETITION_PERMISSION_LOCATION) {
+            if (grantResults.length == 1
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                //Permission granted
+                startService(new Intent(FormStepAActivity.this, GPSService.class));
+
+            } else {
+                //Permission denied:
+                Log.e("PETITION PERMISSION", "Permission denied");
+                finish();
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            stopService(new Intent(FormStepAActivity.this, GPSService.class));
+        }catch (Exception e){
+            Log.e("StopService", "Fail to stop service");
+        }
+    }
 }

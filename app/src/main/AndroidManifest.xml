@@ -165,6 +165,8 @@
                 android:resource="@xml/syncadapter" />
         </service>
 
+        <service android:name=".resource.GPSService" android:process=":GPS_Service"/>
+
     </application>
 
 </manifest>
