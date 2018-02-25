@@ -11,8 +11,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="5dp"
-            android:layout_margin="10dp">
+            android:paddingTop="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp">
 
             <Button
                 android:id="@+id/buttonCamera"
@@ -39,7 +40,10 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:orientation="horizontal"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="25dp">
             <EditText
                 android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
