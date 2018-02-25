@@ -25,6 +25,7 @@
     <string name="next_activity">Continue</string>
     <string name="message_form">You must enter a name</string> <!-- This is no longer used here -->
     <string name="error_required_field">Mandatory field</string>
+    <string name="fail_message_start_activity">An error has occurred and you can not send notices. \nClose the application and try again later.</string>
 
     <!-- Activity FormStepB -->
     <string name="title_activity_form_step_bavtivity">Call form</string>
@@ -121,5 +122,6 @@
     <string name="web">https://jjsr.es</string>
     <string name="pref_array_default">Español</string>
     <string name="general_settings">General Settings</string>
+
 
 </resources>

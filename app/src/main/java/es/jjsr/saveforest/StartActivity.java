@@ -17,9 +17,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import es.jjsr.saveforest.contentProviderPackage.CountryProvider;
 import es.jjsr.saveforest.resource.DownloadManualAsyncTask;
 import es.jjsr.saveforest.resource.SettingsActivity;
+import es.jjsr.saveforest.resource.UpdateCountryTable;
 
 
 /**
@@ -57,6 +60,7 @@ public class StartActivity extends AppCompatActivity
         final CheckBox callme = (CheckBox) findViewById(R.id.checkBoxCallMe);
         Button next = (Button) findViewById(R.id.next);
 
+        validateCountries(next);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,5 +167,12 @@ public class StartActivity extends AppCompatActivity
         progressDialog.setProgress(0);
         progressDialog.setMax(100);
         new DownloadManualAsyncTask(getApplicationContext(), progressDialog).execute(urlToDownload);
+    }
+
+    private void validateCountries(Button next){
+        if (new CountryProvider().allRowsCountries(getContentResolver()) == 0){
+            next.setEnabled(false);
+            Toast.makeText(this, getString(R.string.fail_message_start_activity), Toast.LENGTH_LONG).show();
+        }
     }
 }
