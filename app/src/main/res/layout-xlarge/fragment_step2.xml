@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="es.jjsr.saveforest.fragments.StepA.Step2Fragment">
+
+
+    <LinearLayout
+        android:id="@+id/firstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_countries"
+            android:layout_marginStart="35dp"
+            android:layout_marginLeft="35dp"
+            android:textSize="25dp"/>
+
+        <Spinner
+            android:id="@+id/SpinerCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:paddingEnd="25dp"
+            android:paddingStart="25dp"></Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/firstLayout"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white"
+        android:elevation="5dp">
+
+            <CheckBox
+                android:id="@+id/checkBoxGPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gps"
+                android:textSize="25dp"
+                android:padding="20sp"/>
+
+        <include layout="@layout/fragment_google_maps" />
+
+    </LinearLayout>
+
+</LinearLayout>
