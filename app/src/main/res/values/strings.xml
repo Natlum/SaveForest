@@ -25,7 +25,7 @@
     <string name="next_activity">Continuar</string>
     <string name="message_form">Debe introducir un nombre</string><!-- Este ya no se usa aquí-->
     <string name="error_required_field">Campo obligatorio</string>
-    <string name="fail_message_start_activity">Se ha producido un error y no se podrá enviar avisos. \\nCierre la aplicación y inténtelo más tarde.</string>
+    <string name="fail_message_start_activity">Se ha producido un error y no se podrá enviar avisos. \nCierre la aplicación y inténtelo más tarde.</string>
 
 
     <!-- Activity FormStepB -->

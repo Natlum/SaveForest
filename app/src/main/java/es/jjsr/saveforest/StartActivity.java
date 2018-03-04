@@ -60,20 +60,20 @@ public class StartActivity extends AppCompatActivity
         final CheckBox callme = (CheckBox) findViewById(R.id.checkBoxCallMe);
         Button next = (Button) findViewById(R.id.next);
 
-        validateCountries(next);
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate(textName)){
-                    if(callme.isChecked()){
-                        Intent startFromSetpB = new Intent(context, FormStepBAvtivity.class);
-                        startFromSetpB.putExtra("name", textName.getText().toString());
-                        startActivity(startFromSetpB);
-                    }else{
-                        Intent startFromStepA = new Intent(context, FormStepAActivity.class);
-                        startFromStepA.putExtra("name", textName.getText().toString());
-                        startActivity(startFromStepA);
+                if (validateCountries()){
+                    if(validate(textName)){
+                        if(callme.isChecked()){
+                            Intent startFromSetpB = new Intent(context, FormStepBAvtivity.class);
+                            startFromSetpB.putExtra("name", textName.getText().toString());
+                            startActivity(startFromSetpB);
+                        }else{
+                            Intent startFromStepA = new Intent(context, FormStepAActivity.class);
+                            startFromStepA.putExtra("name", textName.getText().toString());
+                            startActivity(startFromStepA);
+                        }
                     }
                 }
             }
@@ -169,10 +169,12 @@ public class StartActivity extends AppCompatActivity
         new DownloadManualAsyncTask(getApplicationContext(), progressDialog).execute(urlToDownload);
     }
 
-    private void validateCountries(Button next){
+    private boolean validateCountries(){
         if (new CountryProvider().allRowsCountries(getContentResolver()) == 0){
-            next.setEnabled(false);
+            //next.setEnabled(false);
             Toast.makeText(this, getString(R.string.fail_message_start_activity), Toast.LENGTH_LONG).show();
+            return false;
         }
+        return true;
     }
 }
