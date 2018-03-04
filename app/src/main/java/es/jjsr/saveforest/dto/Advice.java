@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by José Juan Sosa Rodríguez on 12/10/2017.
  */
 
-public class Advice implements Serializable{
+public class Advice implements Serializable {
 
     private String text;
 
@@ -123,4 +123,5 @@ public class Advice implements Serializable{
     public String toString() {
         return "Advice: " + id + "," + name + "," + idCountry + "," + description + "," + latitude + "," + longitude + "," + nameImage + "," + phoneNumber;
     }
+
 }
