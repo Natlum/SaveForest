@@ -67,6 +67,8 @@ public class AdviceVolley {
         String tag_json_obj = "addAdvice";
         String url = GConstants.ADVICES_SERVER_ROUTE + "/insert-advices";
 
+        Log.e(TAG, advice.toString());
+
         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyyMMdd");
         String dateString = originalFormat.format(advice.getDate());
         Integer date = Integer.valueOf(dateString);

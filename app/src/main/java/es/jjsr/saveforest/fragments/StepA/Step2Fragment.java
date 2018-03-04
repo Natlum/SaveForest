@@ -62,6 +62,8 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
     int [] arrayIdCountries;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
+    private Receiver receiver;
+
     private View v;
 
     private static final int PETITION_PERMISSION_LOCATION = 101;
@@ -91,7 +93,7 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(GPSService.ACTION);
-        Receiver receiver = new Receiver();
+        receiver = new Receiver();
         getActivity().registerReceiver(receiver, filter);
 
         return v;
@@ -280,6 +282,17 @@ public class Step2Fragment extends Fragment implements OnMapReadyCallback, Loade
             }
         }
         return false;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        try {
+            getActivity().unregisterReceiver(receiver);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public class Receiver extends BroadcastReceiver {
