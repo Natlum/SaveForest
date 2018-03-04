@@ -61,7 +61,7 @@ public class InsertRecordTest {
         pauseTestFor(2500);
         onView(withId(R.id.floatingButtonSendStepB)).perform(click());
         pauseTestFor(5000);
-        Log.i("Test", "Se ha añadido el registro en el Content Provider");
+        Log.i("Insert_Test", "Se ha añadido el registro en el Content Provider");
         validateRecord(resolver);
     }
 
@@ -73,7 +73,7 @@ public class InsertRecordTest {
         for (Advice advice: advices) {
             if (advice.getName().equals("Nombre Test")){
                 found = true;
-                Log.i("Test", "Se ha verificado el registro en el Content Provider");
+                Log.i("Insert_Test", "Se ha verificado el registro en el Content Provider");
             }
         }
 
