@@ -7,7 +7,7 @@ Android App for the 2017-2018 DAM Course project
 It is an application to send notices of incidents that can be prevented. 
 Just install the alpicación on your mobile device and send notices.
 
-![alt text](https://media.giphy.com/media/QkqRmtkDhXCeI/giphy.gif)
+![alt text](https://giphy.com/media/QkqRmtkDhXCeI/giphy.gif)
 
 ### Prerequisites
 
